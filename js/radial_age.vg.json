@@ -1,0 +1,90 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "values": [
+        {
+          "S": "Adult",
+          "b": 18028
+        },
+        {
+          "S": "Children",
+          "b": 5181
+        },
+        {
+          "S": "Senior Citizen",
+          "b": 2978
+        }
+      ]
+    },
+    "width": 520,
+    "height": "container",
+    "layer": [
+      {
+        "mark": {
+          "type": "arc",
+          "innerRadius": 0,
+          "stroke": "#fff"
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "radiusOffset": 30,
+          "size": 20,
+          "color": "black"
+        },
+        "encoding": {
+          "text": {
+            "field": "b",
+            "type": "quantitative"
+          }
+        }
+      }
+    ],
+    "encoding": {
+      "theta": {
+        "field": "b",
+        "type": "quantitative",
+        "stack": true
+      },
+      "radius": {
+        "field": "b",
+        "scale": {
+          "type": "sqrt",
+          "zero": true,
+          "rangeMin": 20
+        }
+      },
+      "color": {
+        "field": "S",
+        "type": "nominal",
+        "legend": {
+          "labelFont": "Roboto",
+          "labelFontSize": 15,
+          "titleFont": "Roboto",
+          "titleFontSize": 15,
+          "title": "Age Group",
+          "orient": "top-left"
+        },
+        "scale": {
+          "range": [
+            "#a1aadd",
+            "#93c7d3",
+            "#9cb5b5"
+          ]
+        }
+      }
+    },
+    "title": {
+      "text": "Vaccination Taken Among Different Age Group",
+      "font": "Roboto",
+      "fontSize": 15
+    },
+    "config": {
+      "style": {
+        "cell": {
+          "stroke": "transparent"
+        }
+      }
+    }
+  }
