@@ -1,153 +1,152 @@
 {
-    "title": "Logged GDP per capita against Happiness Score",
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 650,
-    "height": 600,
-    "data": {
-      "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/New2023_WorldHappinessIndex.csv"
-    },
-    "params": [
-      {
-        "name": "Logged_GDP_per_capita_Above",
-        "value": "1",
-        "bind": {
-          "input": "range",
-          "min": 5.5,
-          "max": 12,
-          "step": 0.5,
-          "name": "Minimum Logged GDP per capita"
-        }
+  "title": "Logged GDP per capita against Happiness Score",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 650,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/New2023_WorldHappinessIndex.csv"
+  },
+  "params": [
+    {
+      "name": "Logged_GDP_per_capita_Above",
+      "value": "1",
+      "bind": {
+        "input": "range",
+        "min": 5.5,
+        "max": 12,
+        "step": 0.5,
+        "name": "Minimum Logged GDP per capita"
       }
-    ],
-    "layer": [
-      {
-        "transform": [{"filter": "datum['Log_GDP_per_capita'] > 0"},
-        {"filter": "datum['Log_GDP_per_capita'] > Logged_GDP_per_capita_Above"}],
-        "mark": "circle",
-        "params": [
+    }
+  ],
+  "layer": [
+    {
+      "transform": [{"filter": "datum['Log_GDP_per_capita'] > 0"},
+      {"filter": "datum['Log_GDP_per_capita'] > Logged_GDP_per_capita_Above"}],
+      "mark": "circle",
+      "params": [
+        {
+          "name": "continent",
+          "select": {"type": "point", "fields": ["continent"]},
+          "bind": "legend"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Log_GDP_per_capita",
+          "type": "quantitative",
+          "scale": {"zero": false, "domain": [5.5, 12]},
+          "title": "Logged GDP per capita"
+        },
+        "y": {
+          "field": "happiness_score",
+          "type": "quantitative",
+          "scale": {"zero": false, "domain": [1.5, 8]},
+          "title": "Happiness score"
+        },
+        "size": {
+          "field": "Social_support",
+          "type": "quantitative",
+          "title": "Social support"
+        },
+        "color": {
+          "scale": {"scheme": "category10"},
+          "field": "continent",
+          "type": "nominal",
+          "title": "Continent"
+        },
+        "opacity": {
+          "condition": {"param": "continent", "value": 0.7},
+          "value": 0.1
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal", "title": "Country"},
+          {"field": "continent", "type": "nominal", "title": "Continent"},
           {
-            "name": "continent",
-            "select": {"type": "point", "fields": ["continent"]},
-            "bind": "legend"
-          }
-        ],
-        "encoding": {
-          "x": {
             "field": "Log_GDP_per_capita",
             "type": "quantitative",
-            "scale": {"zero": false, "domain": [5.5, 12]},
             "title": "Logged GDP per capita"
           },
-          "y": {
-            "field": "happiness_score",
-            "type": "quantitative",
-            "scale": {"zero": false, "domain": [1.5, 8]},
-            "title": "Happiness score"
-          },
-          "size": {
+          {
             "field": "Social_support",
             "type": "quantitative",
             "title": "Social support"
-          },
-          "color": {
-            "scale": {"scheme": "category10"},
-            "field": "continent",
-            "type": "nominal",
-            "title": "Continent"
-          },
-          "opacity": {
-            "condition": {"param": "continent", "value": 0.7},
-            "value": 0.1
-          },
-          "tooltip": [
-            {"field": "country", "type": "nominal", "title": "Country"},
-            {"field": "continent", "type": "nominal", "title": "Continent"},
-            {
-              "field": "Log_GDP_per_capita",
-              "type": "quantitative",
-              "title": "Logged GDP per capita"
-            },
-            {
-              "field": "Social_support",
-              "type": "quantitative",
-              "title": "Social support"
-            }
-          ]
-        }
-      },
-      {
-        "mark": {"type": "line", "color": "firebrick"},
-        "transform": [
-          {"regression": "Log_GDP_per_capita", "on": "happiness_score"}
-        ],
-        "encoding": {
-          "x": {"field": "Log_GDP_per_capita", "type": "quantitative"},
-          "y": {"field": "happiness_score", "type": "quantitative"}
-        }
-      },
-      {
-        "transform": [
-          {
-            "filter": {
-              "field": "country",
-              "oneOf": [
-                "Australia",
-                "Luxembourg",
-                "Bolivia",
-                "Nicaragua",
-                "Democratic Republic of the Congo",
-                "India"
-              ]
-            }
           }
-        ],
-        "mark": {"type": "text", "dy": 15},
-        "encoding": {
-          "y": {"field": "happiness_score", "type": "quantitative"},
-          "x": {"field": "Log_GDP_per_capita", "type": "quantitative"},
-          "text": {"field": "country", "type": "nominal"},
-          "color": {"value": "black"},
-          "opacity": {"condition": {"param": "continent", "value": 1}, "value": 0.1}
-        }
-      },
-      {
-        "transform": [
-          {"filter": "datum.country == 'Luxembourg'"},
-          {
-            "calculate": "'All Western European countries lb have high economic production lb and lower perceptions of corruption'",
-            "as": "text_annotation"
-          }
-        ],
-        "mark": {"type": "text", "fontWeight": "bold", "dx": -50, "dy": -260},
-        "encoding": {
-          "text": {"field": "text_annotation"},
-          "color": {"value": "#17becf"},
-          "size": {"value": 15}
-        }
+        ]
       }
-    ],
-    "config": {
-      "axis": {
-        "labelColor": "black",
-        "titleColor": "black",
-        "gridColor": "lighter"
-      },
-      "autosize": {"type": "pad"},
-      "lineBreak": "lb",
-      "title": {
-        "fontSize": 15,
-        "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5}
-      },
-      "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5},
-      "style": {
-        "guide-title": {"font": "Noto Sans, sans-serif", "fontSize": 15},
-        "text": {
-          "font": "Noto Sans, sans-serif",
-          "fontWeight": "normal",
-          "size": 14
+    },
+    {
+      "mark": {"type": "line", "color": "firebrick","strokeDash": [4,2]},
+      "transform": [
+        {"regression": "Log_GDP_per_capita", "on": "happiness_score"}
+      ],
+      "encoding": {
+        "x": {"field": "Log_GDP_per_capita", "type": "quantitative"},
+        "y": {"field": "happiness_score", "type": "quantitative"}
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": {
+            "field": "country",
+            "oneOf": [
+              "Australia",
+              "Luxembourg",
+              "Bolivia",
+              "Nicaragua",
+              "Democratic Republic of the Congo",
+              "India"
+            ]
+          }
         }
-      },
-      "legend": {"columns": 1, "labelLimit": 300}
+      ],
+      "mark": {"type": "text", "dy": 15},
+      "encoding": {
+        "y": {"field": "happiness_score", "type": "quantitative"},
+        "x": {"field": "Log_GDP_per_capita", "type": "quantitative"},
+        "text": {"field": "country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {"condition": {"param": "continent", "value": 1}, "value": 0.1}
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.country == 'Luxembourg'"},
+        {
+          "calculate": "'All Western European countries lb have high economic production lb and lower perceptions of corruption'",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": {"type": "text", "fontWeight": "bold", "dx": -50, "dy": -260},
+      "encoding": {
+        "text": {"field": "text_annotation"},
+        "color": {"value": "#17becf"},
+        "size": {"value": 15}
+      }
     }
+  ],
+  "config": {
+    "axis": {
+      "labelColor": "black",
+      "titleColor": "black",
+      "gridColor": "lighter"
+    },
+    "autosize": {"type": "pad"},
+    "lineBreak": "lb",
+    "title": {
+      "fontSize": 15,
+      "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5}
+    },
+    "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5},
+    "style": {
+      "guide-title": {"font": "Noto Sans, sans-serif", "fontSize": 15},
+      "text": {
+        "font": "Noto Sans, sans-serif",
+        "fontWeight": "normal",
+        "size": 14
+      }
+    },
+    "legend": {"columns": 1, "labelLimit": 300}
   }
-  
+}
