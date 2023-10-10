@@ -1,0 +1,104 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+  "height": 400,
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+      "axis": {"labelFont": "Open Sans", "titleFont": "Open Sans"},
+      "legend": {"labelFont": "Open Sans", "titleFont": "Open Sans"},
+      "header": {"labelFont": "Open Sans", "titleFont": "Open Sans"},
+      "mark": {"font": "Open Sans"},
+      "title": {"font": "Open Sans", "subtitleFont": "Open Sans"}
+  },"background": "#f2f3f7",
+    "data": {
+        "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/Calc_WHI.csv"
+    }, 
+    "params": [
+      
+        {
+          "name": "Country_selection",
+          "bind": {
+            "input": "select", 
+            "options": [
+              "Afghanistan", "Albania", "Algeria", "Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahrain","Bangladesh","Belarus","Belgium","Belize","Benin",
+                "Bhutan","Bolivia","Bosnia and Herzegovina", "Botswana","Brazil", "Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Central African Republic","Chad",
+                "Chile","China","Colombia","Comoros","Congo (Brazzaville)","Congo (Kinshasa)","Costa Rica","Croatia","Cyprus","Czech Republic","Denmark","Djibouti","Dominican Republic",
+                "Ecuador","Egypt","El Salvador","Estonia","Ethiopia","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Guatemala","Guinea","Haiti","Honduras",
+                "Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kosovo",
+                "Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Lithuania","Luxembourg","Macedonia","Madagascar","Malawi","Malaysia","Mali","Malta", "Mauritania",
+                "Mauritius","Mexico", "Moldova","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands", "New Zealand", "Nicaragua","Niger","Nigeria",
+                "North Cyprus","Norway", "Oman", "Pakistan", "Palestinian Territories", "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar","Romania",
+                "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Somalia", "Somaliland region", "South Africa", "South Korea",
+                "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Trinidad and Tobago",
+                "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Yemen",
+                "Zambia", "Zimbabwe"
+            ],
+            "labels": [
+              "Afghanistan", "Albania", "Algeria", "Angola","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahrain","Bangladesh","Belarus","Belgium","Belize","Benin",
+                "Bhutan","Bolivia","Bosnia and Herzegovina", "Botswana","Brazil", "Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Central African Republic","Chad",
+                "Chile","China","Colombia","Comoros","Congo (Brazzaville)","Congo (Kinshasa)","Costa Rica","Croatia","Cyprus","Czech Republic","Denmark","Djibouti","Dominican Republic",
+                "Ecuador","Egypt","El Salvador","Estonia","Ethiopia","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Guatemala","Guinea","Haiti","Honduras",
+                "Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kosovo",
+                "Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Lithuania","Luxembourg","Macedonia","Madagascar","Malawi","Malaysia","Mali","Malta", "Mauritania",
+                "Mauritius","Mexico", "Moldova","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands", "New Zealand", "Nicaragua","Niger","Nigeria",
+                "North Cyprus","Norway", "Oman", "Pakistan", "Palestinian Territories", "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar","Romania",
+                "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Somalia", "Somaliland region", "South Africa", "South Korea",
+                "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Trinidad and Tobago",
+                "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Yemen",
+                "Zambia", "Zimbabwe"
+            ],
+            "name": "Country: "
+          }, "value": "Afghanistan"
+        }
+      ],
+      "transform": [
+        {
+          "filter":  "Country_selection == datum.Country"
+        },
+        {
+          "joinaggregate": [
+            { 
+              "op": "mean",
+              "field": "Value",
+              "as": "average_value"
+            }
+          ],
+          "groupby": [
+            "Country", "Factors", "average_value"
+          ]
+        }
+    ],
+    "layer": [{
+      "mark": {"type": "arc", "innerRadius": 20, "stroke":null}
+    },{
+      "mark": {"type": "text", "radiusOffset": 11},
+      "encoding": {
+        "text": {"field": "average_value", "type": "quantitative","format": ".2f"}
+      }
+    }],
+    "encoding": {
+      "theta": {"field": "average_value", "type": "quantitative", "stack": true, "aggregate": "mean"},
+      "radius": {"field": "average_value", "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}, "aggregate": "mean"},
+      "color": {"field": "Factors", "type": "nominal",
+      "scale": {"range": ["#6DB25A", "#FF8E4D", "#6B9FFF", "#FFD24A", "#FF71A7", "#8798A7"]},
+      "legend": {
+      
+        "offset": -150
+      }},
+      "tooltip": [
+        {
+            "field": "Factors",
+            "type": "nominal",
+            "title": "Factors"
+        },
+        {
+            "field": "average_value",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Average Value"
+        }   
+            ]
+    }
+  }
