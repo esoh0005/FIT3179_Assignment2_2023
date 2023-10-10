@@ -52,6 +52,17 @@
           "labels": ["Show All", "North America"],
           "name": "Continent Selection: "
         }
+      },
+      {
+          "name": "Year_selection",
+          "value":2023,
+          "bind": {
+              "input": "range",
+              "min": 2005,
+              "max": 2023,
+              "step": 1,
+              "name": "Year: "
+          }
       }
     ],
     "layer": [
@@ -78,24 +89,27 @@
         "encoding": {"tooltip": {"field": "NoData"}}
       },
       {
-        "data": {
-          "url": "https://raw.githubusercontent.com/chloechee1130/FIT3179_Homework4-W10/main/json/ne_110m.json",
-          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-        },
-        "transform": [
-          {
-            "lookup": "properties.NAME",
-            "from": {
-              "data": {
-                "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/COPY2023_WorldHappinessIndex.csv"
-              },
-              "key": "country",
-              "fields": ["happiness_score", "continent", "year"]
-            }
+      "data": {
+        "url": "https://raw.githubusercontent.com/chloechee1130/FIT3179_Homework4-W10/main/json/ne_110m.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/NewCleaned_WHI.csv"
+            },
+            "key": "country",
+            "fields": ["happiness_score", "continent", "year"]
+          }
           },
           {"calculate": "datum.happiness_score", "as": "Happiness Score"},
           {
             "filter": "Continent_selection == null || datum.continent == Continent_selection"
+          },
+          {
+            "filter": "datum.year == Year_selection" 
           }
         ],
         "layer": [
@@ -144,11 +158,14 @@
           },
           {
             "data": {
-              "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/COPY2023_WorldHappinessIndex.csv"
+              "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/NewCleaned_WHI.csv"
             },
             "transform": [
               {
                 "filter": "Continent_selection == null || datum.continent == Continent_selection"
+              },
+              {
+                "filter": "datum.year == Year_selection" 
               },
               {
                 "window": [{"op": "rank", "as": "ranking"}],
