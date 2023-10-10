@@ -1,4 +1,4 @@
-﻿country,year,happiness_score,Log_GDP_per_capita,Social_support,Healthy_life_expectancy_at_birth,Freedom_to_make_life_choices,Generosity,Perceptions_of_corruption,Positive_affect,Negative_affect,Continent
+﻿country,year,happiness_score,Log_GDP_per_capita,Social_support,Healthy_life_expectancy_at_birth,Freedom_to_make_life_choices,Generosity,Perceptions_of_corruption,Positive_affect,Negative_affect,continent
 Afghanistan,2023,1.859,7.324,0.341,54.712,0.382,-0.081,0.847,0,0,Asia
 Albania,2023,5.277,9.567,0.718,69.15,0.794,-0.007,0.878,0,0,Europe
 Algeria,2023,5.329,9.3,0.855,66.549,0.571,-0.117,0.717,0,0,Africa
