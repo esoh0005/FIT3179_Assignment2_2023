@@ -18,6 +18,9 @@
         "labelLimit": 500,
         "titleFontSize": 14
       },
+      "view": {
+        "stroke": "transparent"
+      },
       "lineBreak": "linebreak",
       "title": {"fontSize": 20, "font": "Helvetica Neue, Arial"},
       "style": {
