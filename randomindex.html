@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" style="max-width: 1350px; margin: auto;">
+  <head >
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="img/tabIcon.png" />
+    <body >
+    <!-- The tab's icon image -->
+    
+    <!-- Bootstrap -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    
+    <!-- Fonts -->
+    <!-- noto sans 300 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <!-- Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Vegalite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <title>World Happiness Visualisation</title>
+  </head>
+  <body class="vsc-initialized" >
+    <!-- Header (Title) -->
+    <div class="section p-3" >
+      <div class="card" >
+        <div class="row background_b">
+          <div class="col-12 d-flex justify-content-center">
+            <div class="h1 align-middle p-3" id="headline">
+              World Happiness Report
+            </div>
+          </div>
+        </div>
+        <div class="row background_a">
+          <div class="col-12 d-flex justify-content-center">
+            <div class="span p-4">
+              The World Happiness Report is a publication that contains articles and rankings of national happiness, 
+              based on respondent ratings of their own lives from a scale of
+              <span class="fw-bold fs-4 sad">0</span> to
+              <span class="fw-bold fs-4 happy">10</span>. 
+              As of March 2022, <b><a style="color: black;" href="https://en.wikipedia.org/wiki/Finland">Finland</a></b> had been ranked the happiest country in the world five times in a row. Let's dive
+              into the visualisations below to see which countries are the happiest and why.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Choropleth Map Section -->
+    <div class="section p-3">
+      <div class="card">
+        <div class="row background_c">
+          <div class="col-12">
+            <div class="span p-4">
+              The following map shows the happiness of different countries over the past
+              <b>10 years</b>. Generally, developed countries
+              in <b>Western Europe</b>, 
+              <b class="fw-bold">North America</b> and <b>ANZ</b> are the <b class="happy">happiest</b>. Conversely, under-developed countries in 
+              <b>Sub-Saharan Africa</b> are the <b class="sad">saddest</b>.
+            </div>
+            <p class="px-3 fs-6 hints" >
+              Use the <b>filters</b> below to analyse different regions of the world.
+            </p>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <div id="vis1" class="p-3 w-100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boxplot section (Regional happiness) -->
+        <div class="section p-3">
+          <div class="card">
+            <div class="row background_a">
+              <div class="col-12 mt-3 mx-3" >
+                <div class="h1 fw-bold px-2">Distribution of Happiness in Different Regions</div>
+              </div>
+              <div class="col-12 m-3 generalTextPadding px-3" >
+                The multiple box plots below show how regions fair
+                against each other. At first glance, we see that 
+                <b>Czechia</b>
+                is far <span class="fw-bold happy">happier</span> than many of its counterparts in 
+                <span class="fw-bold ceEurope">Central and Eastern Europe</span>. 
+                Meanwhile, the <span class="fw-bold midEast" >Middle East and North Africa</span> 
+                has the largest range of perceived happiness, with both tails of the box plot stretching
+                far past the global average in both directions.
+              </div>
+              <div class="col-12 p-3 d-flex justify-content-center">
+                <div id="vis3" class="w-100 p-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- Bubbleplot selection (interactive) -->
+    <div class="section p-3">
+      <div class="card">
+        <div class="row background_b d-flex justify-content-center p-4">
+          <span class="h4 text-center">We have seen above that different regions and nations have vastly different happiness levels.</span>
+          <span class="h4 text-center">Let's take a look at the possible <b>indicators</b> that are related to happiness by selecting the icons below!</span>
+        </div>
+        <div class="row background_icons p-1">
+          <div class="col-3 d-flex justify-content-center">
+            <img
+              src="img/gdp.png"
+              alt="GDP icon unavailable"
+              class="rainbow rainbow-5 factor-icon"
+              id="gdpIcon"
+              onclick="toggleScatterPlot('gdpBubbleplot','gdpIcon')"
+            />
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+            <img
+              src="img/freedom.png"
+              alt="IFreedom icon unavailable"
+              class="rainbow rainbow-5 factor-icon"
+              id="freedomIcon"
+              onclick="toggleScatterPlot('freedomBubblePlot','freedomIcon')"
+            />
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+            <img
+              src="img/generosity.png"
+              alt="Generosity icon unavailable"
+              class="rainbow rainbow-5 factor-icon"
+              id="generousIcon"
+              onclick="toggleScatterPlot('generousBubblePlot','generousIcon')"
+            />
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+            <img
+              src="img/growth.png"
+              alt="Life expectancy icon unavailable"
+              class="rainbow rainbow-5 factor-icon"
+              id="growthIcon"
+              onclick="toggleScatterPlot('growthBubblePlot','growthIcon')"
+            />
+          </div>
+        </div>
+        <!-- These are the tabs that handle the dynamic texts -->
+        <div class="row background_b p-3 sp" id="gdpBubbleplot">
+          <div class="col-sm-12 justify-content-center bubble_plot_chart">
+            <div id="vis2a" class="w-100"></div>
+          </div>
+          <div class="col-sm-12 justify-content-center bubble_plot_text" >
+            <span class="p-3">
+              <div class="h3 pb-3 fw-bold">Who says <span class="pop">money</span> can't make you happy!</div>
+              The bubble plot shows a <span style="font-style:italic;">high</span> correlation between <b>happiness</b> and
+              <b>GDP</b>. This shows that richer countries tend to be happier compared
+              to poorer countries.<br><br> Note how <span class="fw-bold WE" >Western Europe</span> 
+              is the richest and also happiest region. It also has some of the highest social support of any region. Some 
+              <span class="fw-bold eastAsia">East Asian</span>
+              countries such as <span class="fw-bold">Taiwan</span>, 
+              <span class="fw-bold">Japan</span> and <span class="fw-bold">South Korea</span> also have very
+              good economic production and social support score.
+            </span>
+          </div>
+        </div>
+
+        <div class="row background_b p-3 sp" id="freedomBubblePlot">
+          <div class="col-sm-12 justify-content-center bubble_plot_chart">
+            <div id="vis2b" class="w-100"></div>
+          </div>
+          <div class="col-sm-12 justify-content-center bubble_plot_text">
+            <span class="p-3">
+              <div class="h3 pb-3 fw-bold"><span class="pop">Free</span> as a bird!</div>
+              The bubble plot shows a <span style="font-style:italic;">moderate</span> correlation between 
+              <span class="fw-bold">happiness</span> and
+              <span class="fw-bold">freedom</span> to make life choices and 
+              <b>perceptions of corruption</b>. 
+              <span class="fw-bold WE">Western European</span> 
+              countries seem to have very high level of freedom, with <span class="fw-bold">Finland</span>
+              being the <b>most free</b> country in the world.<br><br> <p><span class="fw-bold">Afghanistan</span> is not only
+              the <b class="fw-bold sad">saddest</b> country, but also the country with the highest level of 
+              <b>corruption</b> and the 
+              <b>least freedom</b>.
+              This may be due to the fact that the extreme military organisation 
+              <a href="https://www.aljazeera.com/tag/taliban/" class="fw-bold" target="_blank">Taliban</a> 
+              has taken over the country in 2021, and still continues to make headlines for all the wrong reasons.</p>
+            </span>
+          </div>
+        </div>
+
+        <div class="row background_b p-3 sp" id="generousBubblePlot">
+          <div class="col-sm-12 justify-content-center bubble_plot_chart">
+            <div id="vis2c" class="w-100"></div>
+          </div>
+          <div class="col-sm-12 justify-content-center bubble_plot_text" >
+            <span class="p-3">
+              <div class="h3 pb-3 fw-bold"><span class="pop">Generosity</span> comes from the wallet not the heart!</div>
+              <b>Happiness</b> and
+              <b>generosity</b> appear to have a 
+              <span style="font-style:italic;">low</span> correlation between each other. Even population density seems 
+              to be a <span style="font-style:italic;">poor</span> indicator on predicting a nation's happiness.  <br><br> 
+              Interestingly, <b>Finland</b> being the happiest nation in 
+              the world seems to be one of the <b>least generous</b> nations in 
+              <span class="fw-bold WE">Western Europe</span>.
+              On the other hand, countries with below
+              average happiness such as <b>Indonesia</b> and <b>Myanmar</b> are the most
+              generous in the world.
+            </span>
+          </div>
+        </div>
+
+        <div class="row background_b p-3 sp" id="growthBubblePlot">
+          <div class="col-sm-12 justify-content-center bubble_plot_chart">
+            <div id="vis2d" class="w-100"></div>
+          </div>
+          <div class="col-sm-12 justify-content-center bubble_plot_text" >
+            <span class="p-3">
+              <div class="h3 pb-3 fw-bold">Smiles add miles to <span class="pop">life</span>!</div>
+              There's a <span style="font-style:italic;">high</span> correlation between <span class="fw-bold">happiness</span> and
+              <span class="fw-bold">healthy life expectancy</span> from the bubble plot. 
+              <br><br>All <span class="fw-bold subSahar" >Sub-Saharan African</span> countries have
+              relatively <b>short healthy life expectancy</b> and low happiness score.
+              The only exception is <span class="fw-bold">Mauritius</span> which is by far the happiest
+              country from the region with a long healthy life expectancy. Note how population density has 
+              <span style="font-style:italic;">little</span> to no effect on the life expectancy of nations.
+              <br><br>Also note how most <span class="fw-bold WE">Western European</span> countries have
+              some of the <b>highest healthy life expectancies</b> in the world.
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Multichart section -->
+    <div class="section p-3">
+      <div class="card">
+        <div class="row background_c generalTextPadding" style="justify-content: center;">
+          <div class="col-12 mt-3 mx-3">
+            <div class="h1 fw-bold px-2">Happiness in the Long Run</div>
+          </div>
+          <div class="col-12 mt-3 generalTextPadding">
+              <p class="px-2">
+                From a bigger picture, it seems that the happiness levels are
+                very <b>consistent</b>. No matter what timeframe is selected, the
+                average happiness does not seem to vary too much for each region. Moreover, the general top 10 
+                <span class="fw-bold happy" >happiest</span> 
+                countries remain more or less the same throughout the years.
+                The bottom 10 countries however see a large change on a yearly basis.
+              </p>
+              <p class="px-2 fs-6 hints" >
+                The following interactive <b>area chart</b> allows brushing to view the
+                data across the selected timeframe.
+              </p>
+          </div>
+          <div class="flex justify-content-center">
+            <div id="vis5" ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radar chart section -->
+    <div class="section p-3" >
+      <div class="card">
+        <div class="row background_a">
+          <div class="col-12 mt-3 mx-3">
+            <div class="h1 fw-bold px-2">What makes a country <span class ="happy">Happy</span>?</div>
+          </div>
+          <div class="col-12 mx-3 mt-3 generalTextPadding px-3">
+            <span >
+              The 3 <b class="happy">happiest</b> and <b class="sad">saddest</b>
+              countries have been selected from the bar chart above. Note how 
+              <b>GDP, Social Support, Life Expectancy and Freedom</b>  
+              seem to always have a positive correlation to happiness. 
+              <b>Finland</b> and <b>New Zealand</b> have low corruption and excellent social
+              support, while other unfortunate countries suffer from corruption and low
+              quality of life.            
+            </span>
+          </div>
+          <div class="col-12 p-3">
+            <div class="p-3">
+              <div class="flourish-embed flourish-radar" data-src="visualisation/11264076"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Lollipop chart section (Top 5 saddest and happiest countries) -->
+        <div class="section p-3">
+          <div class="card">
+            <div class="row background_b">
+              <div class="col-12 mt-3 mx-3">
+                <h1 class="fw-bold px-2">
+                  5 Happiest and Saddest Countries
+                </h1>
+              </div>
+              <div >
+                <p class="px-3 fs-6 hints pt-4">
+                Click on the <b>lollipops</b> to select a subset of countries, to get their average happiness.
+                </p>
+              </div>
+              <div class="col-12 mt-3 mx-3" style="display: flex;">
+                <div id="vis4" style="flex: 4;"></div>
+                <div class="justify-content-center" style="flex: 1; padding-right: 20px;">
+                  <br><br>
+                  <div class="flex">
+                    <b>All</b> the top 5 happiest countries are from
+                    <span class="fw-bold WE" >Western Europe</span>. 
+                    This may be due to the high GDP per capita and social security in the region as observed in the scatter plots.
+                  </div>
+                  <br><br><br>
+                  <div class="bottom">
+                    Most of the unhappier countries come from the African region.
+                    <span class="fw-bold subSahar">Sub-Saharan Africa</span> in particular contributes to 3 out the 5 saddest nations in the world. 
+                  </div>
+                  <br><br><br>
+                  <div class="bottom">
+                    On the other hand, the <span class="fw-bold sad">saddest</span> country is
+                    <b><a style="color: black;" href="https://en.wikipedia.org/wiki/Afghanistan">Afghanistan</a></b>, 
+                    which is also the only <span class="fw-bold sAsia" >South Asian</span> country that is
+                    ranked within the bottom 10 <span >unhappiest</span> country in the world.
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+
+    <!-- Bumpchart section -->
+    <div class="section p-3">
+      <div class="card">
+        <div class="row background_c">
+          <div class="col-12 mt-3 mx-3 px-3">
+            <h1 class="fw-bold">Are the Top Countries Always <span class="happy">Happy</span>?</h1>
+          </div>
+          <div class="col-12 mt-3 generalTextPadding px-3">
+            <p class="px-3">
+              Let's explore the relative ranks of the happiest nations in the world. We see that 
+              <b>Finland</b>
+              has moved through every rank in the top 5 before settling in <b>1st position</b> in 2016. 
+              Eventhough <b>Denmark</b> has slipped to <b>3rd</b> place over the years, it maintains a strong average <b>above 7.5</b> without fail.
+            </p>
+            <p class="px-3 fs-6 hints" >
+              Click on any of the flags to get more information on that nation, or use the slider to compare a different number of countries.
+            </p>
+          </div>
+          <div class="col-12 px-3">
+            <div class="px-3 pb-3" style="display: flex;">
+              <div id = "vis6" style="flex: 1;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conclusion section -->
+    <div class="section pt-4 pb-3" >
+      <div class="card">
+        <div class="row background_a">
+          <div class="col-12 mt-3 mx-3">
+            <div class="h1 fw-bold">Conclusion</div>
+          </div>
+          <div style="padding: 30px; padding-top: 10px;">
+            <span >
+              To sum it up, it seems that happiness in the long run is relatively constant throughout the world.
+              While this may be bad news with regards to unhappier regions, there is still hope that as countries develop,
+               their citizens will ultimately experience more joy. Hopefully, the nations of the world can be happier in the decades to come!
+            </span>
+          </div>
+          <div class="col-12 pb-4 text-center">
+            <img
+            src="img/world.png"
+            alt="World Happy SVG"
+            class="pt-3"
+            width="200px"
+            height="200px"
+          />
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+    <!-- Footer -->
+    <footer class="text-center position-relative">
+        <span class="lead pt-5">A visualisation by <a class="lead pt-5" style="color: black;" href="https://github.com/2311ajay">Ajay Iswar</a></span>
+    </footer>
+
+    <!-- Change slelect -->
+    <script type="text/javascript">
+      console.log("hi");
+      $("select").each(function () {
+        console.log($this);
+        $(this).addClass("form-select");
+      });
+    </script>
+    <!-- Vegalite Embeds -->
+    <script type="text/javascript">
+      var vis1 = "vegaLiteJsonScripts/choropleth_map.vg.json";
+      vegaEmbed("#vis1", vis1)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis2a = "vegaLiteJsonScripts/gdp_social_support_bubbleplot.json";
+      vegaEmbed("#vis2a", vis2a)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis2b = "vegaLiteJsonScripts/freedom_corruption_bubbleplot.json";
+      vegaEmbed("#vis2b", vis2b)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis2c = "vegaLiteJsonScripts/generosity_bubbleplot.json";
+      vegaEmbed("#vis2c", vis2c)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis2d = "vegaLiteJsonScripts/longevity_bubbleplot.json";
+      vegaEmbed("#vis2d", vis2d)
+        .then(function (result) {})
+        .catch(console.error);
+
+
+      var vis3 = "vegaLiteJsonScripts/multiple_boxplot.json";
+      vegaEmbed("#vis3", vis3)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis4 = "vegaLiteJsonScripts/lollipop.json";
+      vegaEmbed("#vis4", vis4)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis5 = "vegaLiteJsonScripts/triple_chart.json";
+      vegaEmbed("#vis5", vis5)
+        .then(function (result) {})
+        .catch(console.error);
+
+      var vis6 = "vegaLiteJsonScripts/bumpchart.json";
+      vegaEmbed("#vis6", vis6)
+        .then(function (result) {})
+        .catch(console.error);
+    </script>
+
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="vegaLiteJsonScripts/scripts.js"></script>
+
+    <!-- Bootstrap (Popper) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/vegaLiteJsonScripts/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+  crossorigin="anonymous"
+  />
+
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- CSS file -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/styles.css" media="all"> -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- jquery -->
+  <script src="json/jquery-3.6.0.min.js"></script>
+
+</head>
+<body style="background-color: rgb(228, 228, 228);">
+  <!-- Header (Title) -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg1">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="h1 align-middle p-3" id="headline">
+            World Happiness Report
+          </div>
+        </div>
+      </div>
+      <div class="row bg2">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="span p-4">
+            <span class="fw-bold" style="color: #008b8b;">World Happiness Report </span> was created with the intention of helping these countries to have a better understanding of their citizens' level of happiness. It consists of participants from 138 different countries whereby the rank of each country is determined by the country's 
+            <span class="fw-bold" style="color: #4EBA74;">Economy (GDP per Capita)</span>, 
+            <span class="fw-bold" style="color: #72A1C3;">Family (Social Support)</span>, 
+            <span class="fw-bold" style="color: #fab291;">Freedom</span>, 
+            <span class="fw-bold" style="color: #8AD9C2;">Generosity</span>, 
+            <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>,
+            <span class="fw-bold" style="color: #EF7284;">Residual</span> and 
+            <span class="fw-bold" style="color: #F2BA3B;">Trust (government corruption)</span>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP SWITCH  -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2 d-flex justify-content-center p-4">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="h2 fw-bold">World Happiness Score</div>
+        </div>
+      </div>
+      <div class="row bg2 d-flex justify-content-center">
+        <div class="span p-3">
+          In general, developed countries that are mostly found
+          in <span class="fw-bold">Europe</span> are the <span class="fw-bold" style="color: #a63603;">happiest</span>. On the other hand, under-developed countries in <span class="fw-bold">Africa</span> are the <span class="fw-bold" style="color: #fdbe85;">saddest</span>. The following map shows how happy different countires are in
+          <b>2019</b>. 
+        </div>
+        <br><br><span class="fs-6 italic" style="color:#6a6a6a;">You may click on the <b>button icon</b> below to find out the world happiness score for 2020 and there is also a <b>continent selection</b> at the bottom of the map. </span>
+      </div>
+      
+      <!---------- ICON SECTION  ----------->
+      <div class="row bg2 p-2">
+        <div class="col-sm-12 d-flex justify-content-center">
+          <button 
+            class="button-icon"
+            alt="2019 icon unavailable"
+            id="map_2019_icon"
+            onclick="toggleMap('map_2019', 'map_2019_icon')"
+            >2019</button>
+          
+            <br><br><span class="fs-6" style="color:#FFFF;">_________</span>
+
+          <button 
+            class="button-icon"
+            alt="2020 icon unavailable"
+            id="map_2020_icon"
+            onclick="toggleMap('map_2020', 'map_2020_icon')"
+            >2020</button>
+
+        </div>
+      </div>
+
+      <!---------- GRAPH SECTION  ----------->  
+      <!-- 2019 -->
+      <div class="row bg2 p-3 map" id="map_2019">
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="worldmap_2019" class="w-100"></div>
+        </div>
+      </div>
+      
+      <!-- FAM -->
+      <div class="row bg2 p-3 map" id="map_2020">
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="worldmap_2020" class="w-100"></div>
+        </div>
+      </div>
+
+      
+
+    </div>
+  </div>
+  <!-- Bar chart section (Top 10 saddest and happiest countries) -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Top 10 Happiest and Saddest Countries</div>
+        </div>
+        <div class="span p-4">
+          <b>New Zealand</b> is the only <b>Top 10 Happiest Country</b> that is not from <span class="fw-bold" style="color:#6296BC;">Europe</span>. 
+          On the other hand, the <b>unhappiest country</b> is
+          <b>Guinea</b> and <b>Haiti</b> for the year of <b>2019</b> and <b>2020</b> respectively, which is also the only <span class="fw-bold" style="color: #FF8A70;">South America</span> country that is ranked within <b>Top 10 Unhappiest Country</b> in the world. The following bar chart shows that <b>happiest countries</b> are located in <span class="fw-bold" style="color:#6296BC;">Europe</span>, and <b>saddest countries</b> are located in <span class="fw-bold" style="color:#7DBCA9;">Africa</span>.
+
+
+          <br><br><span class="fs-6 italic" style="color:#6a6a6a;">You may click on the <b>continent from the legend</b> to highlight it for easier visualisation and there is also a <b>year selection</b> at the bottom of the bar chart. </span>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <div id="barchart" class="w-100 p-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bump chart section (Top 10 Country) -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Factor Rank for Top 10 Happiest Countries by Years</div>
+        </div>
+        <div class="span p-4">
+          The <b>Top 10</b> Countries were identified by taking the <b>Top 10 Happiness Scores which are above 7</b>. 
+          Most of the country listed below are from <span class="fw-bold" style="color: #6296BC;">Europe</span>, and this shows that our initial observation that happiest countries are located in <span class="fw-bold" style="color: #6296BC;">Europe</span>. 
+          <p></p>
+          The following bump chart shows the factor rank for <b>Top 10</b> Countries in <b>2019</b>. <span class="fw-bold" style="color: #0020c2;">Norway</span> is the <span class="fw-bold" style="color: #0020c2;">wealthiest</span> and has the <span class="fw-bold" style="color: #0020c2;">most freedom</span> in the year of <b>2019</b>.
+          <p></p>
+          <span class="fw-bold" style="color: #dda0dd;">Iceland</span> is <span class="fw-bold" style="color: #dda0dd;">free from corruption (Trust)</span> and has the <span class="fw-bold" style="color: #dda0dd;">highest number of family</span> in the year of <b>2020</b>.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>interactive legend</b> to highlight the selected country for easier visualisation and there is also a <b>year selection</b> at the bottom of the bump chart.
+          <p></p>
+          <span class="fs-6" style="color:#6a6a6a;">  
+          </span>
+
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <div id="bumpchart_rank" class="w-100 p-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boxplot Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness in Different Continents</div>
+        </div>
+        <div class="span p-4">
+          The following boxplot shows the distribution of happiness score among different continents for the year of <b>2019</b>. There are outliers such as <b>Algeria</b> is by far the happiest <span class="fw-bold" style="color: #7DBCA9;">Africa</span> country and <b>Guinea</b> is by far the happiest <span class="fw-bold" style="color: #FF8A70;">South America</span> country in <b>2019</b>.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the boxplot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="boxplot" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connected Dot Plot Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Changes in Happiness Rank 2019 - 2020</div>
+        </div>
+        <div class="span p-4">
+            The following connected dot plot shows the changes in the happiness rank of <span class="fw-bold" style="color: #989685;">Asia</span> countries from <b>2019</b> to <b>2020</b>. <b>Jordan</b> that is located in <span class="fw-bold" style="color: #989685;">Asia</span> country has the <b>greatest changes</b> in the happiness rank. 
+            <br><br>
+            <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>continent selection</b> at the bottom of the connected dot plot to observe the data for <b>different continents' countries</b>.
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="connected_dotplot" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donut Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness Rank and Score </div>
+        </div>
+        <div class="col-12 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">and Contribution of Each Factor </div>
+        </div>
+        <div class="span p-4">
+          The following donut chart depicts the <b>contribution of each factor</b> to the country, which includes 
+          <span class="fw-bold" style="color: #4EBA74;">Economy (GDP per Capita)</span>, 
+            <span class="fw-bold" style="color: #72A1C3;">Family (Social Support)</span>, 
+            <span class="fw-bold" style="color: #fab291;">Freedom</span>, 
+            <span class="fw-bold" style="color: #8AD9C2;">Generosity</span>, 
+            <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>,
+            <span class="fw-bold" style="color: #EF7284;">Residual</span> and 
+            <span class="fw-bold" style="color: #F2BA3B;">Trust (government corruption)</span> for <b>Top 10 Happiest Country</b> in the year of <b>2019</b> and <b>2020</b>. 
+          As a result, the <b>Happiness Score</b> is the sum of all factors, and the <b>Happiness Rank</b> is the country's rank based on the <b>Happiness Score</b>.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>country selection</b> at the bottom of the donut chart to observe the data for <b>different Top 10 Countries</b>.
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="faceted_donut" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- bubble SWITCH  -->
+  <div class="section p-2">
+    <div class="container">
+      <!-- <div class="row bg2 d-flex justify-content-center p-4"> -->
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness Score vs Factors</div>
+        </div>
+        <div class="span p-4">
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may click on the <b>icons</b> below to find out the relation between the <b>Happiness Score</b> and each <b>Factor</b>.
+      </div>
+      </div>
+      <!---------- ICON SECTION  ----------->
+      <div class="row bg2 p-1">
+        <!-- GDP icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/economy.png"
+            alt="GDP icon unavailable"
+            class="factor-icon"
+            id="gdp_icon"
+            onclick="toggleSP('gdp_sp', 'gdp_icon')"
+          />
+        </div>
+        <!-- FAM icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/family.png"
+            alt="Family icon unavailable"
+            class="factor-icon"
+            id="fam_icon"
+            onclick="toggleSP('fam_sp', 'fam_icon')"
+          />
+        </div>
+
+        <!-- FREE icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/freedom.png"
+            alt="Freedom icon unavailable"
+            class="factor-icon"
+            id="free_icon"
+            onclick="toggleSP('free_sp', 'free_icon')"
+          />
+        </div>
+
+        <!-- GEN icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/generosity.png"
+            alt="Generosity icon unavailable"
+            class="factor-icon"
+            id="gen_icon"
+            onclick="toggleSP('gen_sp', 'gen_icon')"
+          />
+        </div>
+
+        <!-- Health icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/health.png"
+            alt="Health icon unavailable"
+            class="factor-icon"
+            id="health_icon"
+            onclick="toggleSP('health_sp', 'health_icon')"
+          />
+        </div>
+
+        <!-- COR icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="res/corruption.png"
+            alt="Corruption icon unavailable"
+            class="factor-icon"
+            id="cor_icon"
+            onclick="toggleSP('cor_sp', 'cor_icon')"
+          />
+        </div>
+      </div>
+
+      <!---------- GRAPH SECTION  ----------->  
+      <!-- GDP -->
+      <div class="row bg2 p-2 sp" id="gdp_sp">
+        <div class="span p-3">
+          <div class="h2 pb-3 fw-bold">Rich makes people happy!</div>
+          The following bubble plot shows a <b>high correlation</b> between <b>Happiness Score </b> and <span class="fw-bold" style="color: #4EBA74;">Economy</span>. As a result, the <b>richer countries</b> tend to be <b>happier</b> compared to poorer countries.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_economy" class="w-100"></div>
+        </div>
+      </div>
+      
+      <!-- FAM -->
+      <div class="row bg2 p-2 sp" id="fam_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Family (Social Support) makes people happy!</div>
+          The following bubble plot shows a <b>moderate correlation</b> between <b>Happiness Score </b> and <span class="fw-bold" style="color: #72A1C3;">Family</span>. As a result, the <b>more social support</b> the countries have tend to be <b>happier</b> compared to the countries have less social support. 
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_family" class="w-100"></div>
+        </div>
+      </div>
+
+      <!-- FREE -->
+      <div class="row bg2 p-2 sp" id="free_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Freedom makes people happy!</div>
+          The following bubble plot shows a <b>moderate correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #fab291;">Freedom</span>. As a result, the <b>more freedom</b> the countries have tend to be <b>happier</b> compared to the countries have less freedom.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_freedom" class="w-100"></div>
+        </div>
+      </div>
+
+      <!-- GEN -->
+      <div class="row bg2 p-3 sp" id="gen_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Don't have to be generous to stay happy!</div>
+          The following bubble plot shows a <b>low correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #8AD9C2;">Generosity</span>. We can clearly see that most countries are <b>not generous</b> regardless of being sad or happy. 
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_generosity" class="w-100"></div>
+        </div>
+      </div>
+
+      <!-- HEALTH -->
+      <div class="row bg2 p-2 sp" id="health_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Happy people live longer!</div>
+          The following bubble plot shows a <b>high correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>. As a result, the <b>greater</b> the life expectancy that countries have tend to be <b>happier</b> compared to the countries.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_health" class="w-100"></div>
+        </div>
+      </div>
+      
+      <!-- COR -->
+      <div class="row bg2 p-2 sp" id="cor_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Corruption rarely exist!</div>
+          The following bubble plot shows a <b>low correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #F2BA3B;">Trust (Government Corruption)</span>. We can clearly see that most countries are <b>free from corruption</b> regardless of being sad or happy.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year selection</b> at the bottom of the bubble plot to observe the data for the year of <b>2019</b> and <b>2020</b>.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="scatterplot_trust" class="w-100"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="text-center position-relative">
+      <p class="lead pt-5">Copyright &copy; 2022 Chloe Chee Xuan Lin</p>
+      <a href="#" class="position-absolute bottom-0 end-0">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+  </footer>
+
+  <script type="text/javascript">
+    var worldmap_2020 = "json/WH_map_2020.json";
+    vegaEmbed("#worldmap_2020", worldmap_2020)
+        .then(function (result) {
+          document.getElementById('worldmap_2020').closest('.map').style.display = 'none';
+
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    
+    var worldmap_2019 = "json/WH_map_2019.json";
+    vegaEmbed("#worldmap_2019", worldmap_2019)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+
+          //highlight 1st icon by default
+          let el = document.getElementById('map_2019_icon');
+                el.style.filter =  'grayscale(0%)';
+                el.style.filter =  'brightness(110%)';
+        })
+        .catch(console.error);
+
+    var scatterplot_economy = "json/scatterplot_economy.json";
+    vegaEmbed("#scatterplot_economy", scatterplot_economy)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+
+          //highlight 1st icon by default
+          let el = document.getElementById('gdp_icon');
+                el.style.filter =  'grayscale(0%)';
+                el.style.filter =  'brightness(110%)';
+        })
+        .catch(console.error);
+        
+
+    var scatterplot_family = "json/scatterplot_family.json";
+    vegaEmbed("#scatterplot_family", scatterplot_family)
+        .then(function (result) {
+          document.getElementById('scatterplot_family').closest('.sp').style.display = 'none';
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    
+    var scatterplot_health = "json/scatterplot_health.json";
+    vegaEmbed("#scatterplot_health", scatterplot_health)
+        .then(function (result) {
+          document.getElementById('scatterplot_health').closest('.sp').style.display = 'none';
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+
+    var scatterplot_freedom = "json/scatterplot_freedom.json";
+    vegaEmbed("#scatterplot_freedom", scatterplot_freedom)
+        .then(function (result) {
+          document.getElementById('scatterplot_freedom').closest('.sp').style.display = 'none';
+
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    
+    var scatterplot_trust = "json/scatterplot_trust.json";
+    vegaEmbed("#scatterplot_trust", scatterplot_trust)
+        .then(function (result) {
+          document.getElementById('scatterplot_trust').closest('.sp').style.display = 'none';
+
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+        
+    var scatterplot_generosity = "json/scatterplot_generosity.json";
+    vegaEmbed("#scatterplot_generosity", scatterplot_generosity)
+        .then(function (result) {
+          document.getElementById('scatterplot_generosity').closest('.sp').style.display = 'none';
+
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+
+    var boxplot = "json/boxplot.json";
+    vegaEmbed("#boxplot", boxplot)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+
+    var barchart = "json/barchart.json";
+    vegaEmbed("#barchart", barchart)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+
+    var bumpchart_rank = "json/bumpchart_rank.json";
+    vegaEmbed("#bumpchart_rank", bumpchart_rank)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    
+    var connected_dotplot = "json/connected_dotplot.json";
+    vegaEmbed("#connected_dotplot", connected_dotplot)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    
+    var faceted_donut = "json/faceted_donut.json";
+    vegaEmbed("#faceted_donut", faceted_donut)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+  </script>
+
+  <script type="text/javascript">
+    
+    function toggleSP(spId, icon) {
+      var targetSP = document.getElementById(spId);
+      var hideSP = document.getElementsByClassName('sp');
+      let parent = targetSP.parentNode;
+      let sp_siblings = parent.querySelectorAll('.sp');
+        
+      //hide all siblings
+      sp_siblings.forEach(el => {
+          if(el.id == spId){
+              el.style.display = 'flex';
+          }else{
+              el.style.display = 'none';
+          }
+      });
+
+      var targetIcon = document.getElementById(icon);
+      var darkIcons = document.getElementsByClassName('factor-icon');
+      //get the wrapper for all icons
+      let upUP_parent = targetIcon.closest('.p-1');
+      //get all img within upUP_parent
+      let other_Icons = upUP_parent.querySelectorAll('img');
+        
+      other_Icons.forEach( el => {
+          if(el.id == icon){
+              el.style.filter =  'grayscale(0%)';
+              el.style.filter =  'brightness(110%)';
+          }else{
+              el.style.filter = null; //remove inline style, so it wont override inline
+          }
+      });
+    }
+
+    function toggleMap(mapId, icon) {
+      var targetmap = document.getElementById(mapId);
+      var hidemap = document.getElementsByClassName('map');
+      let parent = targetmap.parentNode;
+      let map_siblings = parent.querySelectorAll('.map');
+        
+      //hide all siblings
+      map_siblings.forEach(el => {
+          if(el.id == mapId){
+              el.style.display = 'flex';
+          }else{
+              el.style.display = 'none';
+          }
+      });
+
+      var targetIcon = document.getElementById(icon);
+      var darkIcons = document.getElementsByClassName('button-icon');
+      //get the wrapper for all icons
+      let upUP_parent = targetIcon.closest('.p-2');
+      //get all img within upUP_parent
+      let other_Icons = upUP_parent.querySelectorAll('button');
+        
+      other_Icons.forEach( el => {
+          if(el.id == icon){
+              el.style.filter =  'grayscale(0%)';
+              el.style.filter =  'brightness(110%)';
+          }else{
+              el.style.filter = null; //remove inline style, so it wont override inline
+          }
+      });
+    }
+    $(document).ready(function() {
+          $('.flourish-credit').remove();
+          
+    });
+
+
+  </script>
+  
+  </body>
+</html>
