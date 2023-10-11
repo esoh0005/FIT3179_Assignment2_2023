@@ -1,7 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": "container",
+    "width": 500,
     "height": 450,
+    "padding":{"left": 20, "top":0, "right":50,"bottom": 0},
     "data": {
       "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/NewCleaned_WHI.csv"
     },

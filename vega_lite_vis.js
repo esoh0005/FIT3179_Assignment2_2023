@@ -1,16 +1,26 @@
-var vg_1 = "new_choropleth_map.vg.json"; 
-var vg_2 = "TopWineProducers.vg.json";
-var vg_3 = "area.vg.json";
+var vg_1 = "js/new_choropleth_map.vg.json"; 
+var vg_2 = "js/boxplot_happiness.vg.json";
+var vg_3 = "js/multiple_views.vg.json";
+var vg_4 = "js/circle_happiness.vg.json";
+var vg_5 = "js/bubble_chart_happiness.vg.json";
 
 vegaEmbed("#map", vg_1).then(function(result) {
     // Access the Vega view instance 
     //(https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
-vegaEmbed("#pie", vg_2).then(function(result) {
+vegaEmbed("#boxplot", vg_2).then(function(result) {
     // Access the Vega view instance 
     //(https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
-vegaEmbed("#area", vg_3).then(function(result) {
+vegaEmbed("#multiple", vg_3).then(function(result) {
+    // Access the Vega view instance 
+    //(https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);
+vegaEmbed("#circle", vg_4).then(function(result) {
+    // Access the Vega view instance 
+    //(https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);
+vegaEmbed("#bubble", vg_5).then(function(result) {
     // Access the Vega view instance 
     //(https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);

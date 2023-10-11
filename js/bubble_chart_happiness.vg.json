@@ -1,7 +1,7 @@
 {
   "title": "Logged GDP per capita against Happiness Score",
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 650,
+  "width": 600,
   "height": 600,
   "data": {
     "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/New2023_WorldHappinessIndex.csv"
