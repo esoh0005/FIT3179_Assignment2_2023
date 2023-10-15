@@ -61,7 +61,7 @@
           "x": {
             "field": "happiness_score",
             "type": "quantitative",
-            "title": "Hapiness Score",
+            "title": "Happiness Score",
             "scale": {"zero": false}
           },
           "y": {"field": "continent", "type": "nominal", "title": null},
