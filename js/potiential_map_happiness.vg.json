@@ -205,7 +205,7 @@
           },
           {
             "data": {
-              "url": "https://raw.githubusercontent.com/2311ajay/FIT3179-Vega-Lite/main/data/world-happiness-report-with-latLong.csv"
+              "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/Region_Compiled_WHI_Data_Lat.csv"
             },
             "encoding": {
               "longitude": {"field": "longitude", "type": "quantitative"},
