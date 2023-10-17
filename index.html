@@ -1,135 +1,475 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Multiple Visualisations | An Example</title>
+  <!-- Bootstrap -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+  crossorigin="anonymous"
+  />
+
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-  <!-- Import pure.css -->
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap" rel="stylesheet">
-
   <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <!-- <link rel="stylesheet" type="text/css" href="css/styles.css" media="all"> -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- jquery -->
+  <script src="json/jquery-3.6.0.min.js"></script>
 
   <!--Vegalite-->
   <script src="vega_lite_vis.js"></script>  
 
-
 </head>
-<body>
-
- <div class="page">
-
-   <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-1" style="text-align: center;">
-        <h1>World Happiness Report</h1>
-        <p>World Happiness Report was created with the intention of helping these countries to have a better understanding of their citizens' level of happiness. It consists of participants from 138 different countries whereby the rank of each country is determined by the country's Economy (GDP per Capita), Family (Social Support), Freedom, Generosity, Health (Life Expectancy), Residual and Trust (government corruption).</p>
-      </div>
-    </div>
-    
-  <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-        <div class="pure-u-1-1" style="text-align: center;">
-            <h2>Happiness Scores around the world</h2>
-            <p>The following map shows the happiness of different countries over the past 10 years. Generally, developed countries in Western Europe, North America and ANZ are the happiest. Conversely, under-developed countries in Sub-Saharan Africa are the saddest.</p>
-          <div id="map">
-            <br>
-        </div>
-        </div>
-    </div>
-    
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-        <div class="pure-u-1-1" style="text-align: center;">
-          <div class="description description-right">
-            <h2>Happiness in Different Continents</h2>
-            <p>The following boxplot shows the distribution of happiness score among different continents for the year of 2023. There are outliers such as Algeria is by far the happiest Africa country and Guinea is by far the happiest South America country in 2023. </p>
+<body style="background-color: rgb(228, 228, 228);">
+  <!-- Header (Title) -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row header">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="h1 align-middle p-3" id="headline">
+            World Happiness Report
           </div>
         </div>
-      
-    </div>
-    <div id="boxplot">
-    </div>
-    <br>
-    <br>
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-1" style="text-align: center;">
-          <h2>Trend of Happiness Scores throughout the years</h2>
-          <p>It can be seen that there was a big rise in low happiness scores at year 2011.</p>
       </div>
-    
-    </div>
-    <div id="multiple">
-    </div>
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-        <div class="pure-u-1-1" style="text-align: center;">
-            <h2>Happiness in Different Continents</h2>
-            <p>The following boxplot shows the distribution of happiness score among different continents for the year of 2023. There are outliers such as Algeria is by far the happiest Africa country and Guinea is by far the happiest South America country in 2023. </p>
+      <div class="row bg2">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="span p-4">
+            The
+            <span class="fw-bold" style="color: #F8D664;">World Happiness Report </span>  
+            the current global state of happiness and illustrates how the science of happiness 
+            clarifies variations in well-being at both individual and national levels. 
+            The data it encompasses includes information on over 150 countries, including details about their
+            <span class="fw-bold" style="color: #4EBA74;">Economy(Logged GDP per Capita)</span>, 
+            <span class="fw-bold" style="color: #72A1C3;">Family (Social Support)</span>,
+            <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>, 
+            <span class="fw-bold" style="color: #fe9462;">Freedom</span>, 
+            <span class="fw-bold" style="color: #8AD9C2;">Generosity</span> and 
+            <span class="fw-bold" style="color: #EF7284;">Trust (Government Corruption)</span>.
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chloropleth MAP  -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2 d-flex justify-content-center p-4">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness Score around the World</div>
+        </div>
+      </div>
+      <div class="row bg2 d-flex justify-content-center">
+        <div class="span p-4 text-justify">
+          The map below shows the happiness of different countries over the past <b>15 years</b>. In a global view, it can be seen 
+          that developed countries in <b>Western Europe</b>, <b> North America</b> and <b> Australia</b> are among the 
+          <span class="fw-bold" style="color: #078707;">happiest</span> in our world with 
+          <span class="fw-bold" style="color: goldenrod;">Finland</span>
+          taking the crown. That being said, under-developed countries in <b>Sub-Saharan Africa</b> rank the 
+          <span class="fw-bold" style="color: #a63603;">lowest</span> in happiness.
+          The following map shows the distribution of happiness in different countires.
+          <br>
+          <br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may click on the <b>dropdown boxes</b> 
+            below the map to select the different regions and positioning of the map. Furthermore, there is a <b>slider</b>
+            which you can scroll to adjust your map-zoom.</span>
+            <div id="map" class="w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donut Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness Rank and Score </div>
+        </div>
+        <div class="col-12 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">and Contribution of Each Factor </div>
+        </div>
+        <div class="span p-4">
+          The following donut chart depicts the <b>contribution of each factor</b> to the country, which includes 
+          <span class="fw-bold" style="color: #4EBA74;">Economy (GDP per Capita)</span>, 
+            <span class="fw-bold" style="color: #72A1C3;">Family (Social Support)</span>, 
+            <span class="fw-bold" style="color: #fab291;">Freedom</span>, 
+            <span class="fw-bold" style="color: #8AD9C2;">Generosity</span>, 
+            <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>,
+            <span class="fw-bold" style="color: #F2BA3B;">Residual</span> and 
+            <span class="fw-bold" style="color: #EF7284;">Trust (Government Corruption)</span> for <b>Top 10 Happiest Country</b> in the year of <b>2021</b>, <b>2022</b> and <b>2023</b>. 
+          As a result, the <b>Happiness Score</b> is the sum of all factors from which and the <b>Happiness Rank</b> will be decided.
+          <br>
+          <br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>country selection</b> at the bottom of the donut chart to observe the data for <b>different Top 10 Countries</b> of each year.
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="circles" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trend of Happiness Scores throughout the years -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Top 10 Happiest and Saddest Countries</div>
+        </div>
+        <div class="span p-4">
+          <span class="fw-bold" style="color: #e6d49f;">Isreal</span>, 
+          <span class="fw-bold" style="color: #8ED6AC;">Canada</span> and
+          <span class="fw-bold" style="color: #FF8C8B;">New Zealand</span>
+          are the only <b>Top 10 Happiest Country</b> that is not from <span class="fw-bold" style="color:#73c3dc;">Europe</span>. 
+          On the other hand, the <b>unhappiest country</b> is mostly 
+          <span class="fw-bold" style="color: #e6d49f;">Asian</span> and 
+          <span class="fw-bold" style="color: #FFA75E;">African</span> countries with the exception of 
+          <span class="fw-bold" style="color: #8ED6AC;">Haiti</span>.
+          The following bar chart shows that <b>happiest countries</b> are located in <span class="fw-bold" style="color:#73c3dc;">Europe</span>
+          , and <b>saddest countries</b> are located in <span class="fw-bold" style="color:#FFA75E;">Africa</span>.
+
+
+          <br><br><span class="fs-6 italic" style="color:#6a6a6a;">
+            You may click on the <b>continent from the legend</b> 
+            to highlight it for easier visualisation and 
+            you can also <b>drag the year</b> to select your desired period. </span>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <div id="multiple" class="w-100 p-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>    
+
+  <!-- Boxplot Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Happiness in Different Continents over the years</div>
+        </div>
+        <div class="span p-4">
+          The following boxplot shows the distribution of 
+          <span class="fw-bold" style="color: #078707;">happiness score </span> 
+          among the different continents over the years for <b>2010</b> till <b>2023</b>. 
+          It appears the peak average <span class="fw-bold" style="color: #078707;">happiness score </span> 
+          happend at <b>2020</b> at <b>5.73</b>, ever since then, it has slowly decreased. 
+          Furthermore throughout the years, 
+          <span class="fw-bold" style="color: #FFA75E;">African</span> has consistently been the 
+          <span class="fw-bold" style="color: #a63603;">unhappiest</span> in happiness. continent while
+          <span class="fw-bold" style="color:#73c3dc;">Europe</span> continent has consistently held 
+          <span class="fw-bold" style="color: #078707;">happiest </span>  country. 
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You may use the <b>year scroller</b> at the bottom of the boxplot to observe the data for the years <b>2010</b> till <b>2023</b>.
+
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="boxplot" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connected Dot Plot Section -->
+  <div class="section p-3">
+    <div class="container">
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Are the Top Countries Always Happy?</div>
+        </div>
+        <div class="span p-4">
+            Let's explore the relative ranks of the happiest nations in the world from the <b>past 15 years</b>.
+            It can be seen that 
+            <span class="fw-bold" style="color:#73c3dc;">Finland</span>
+            has taken the crown of 
+            <span class="fw-bold" style="color: #078707;">happiest</span> 
+            country for the past <b>8 years</b>. 
+            Eventhough 
+            <span class="fw-bold" style="color:#73c3dc;">Denmark</span>
+            has lost it's <b>orignal 1st place</b> over the years, it still maintains a <b>strong average above 7.5</b> without fail.
+            <br><br>
+            <span class="fs-6 italic" style="color:#6a6a6a;">
+              You may <b>click</b> on any of the flags to to get more information on that country or 
+              use the <b>slider</b> to choose the number of ranked countries</span>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="country_line" class="p-3 w-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- bubble SWITCH  -->
+  <div class="section p-2">
+    <div class="container">
+      <!-- <div class="row bg2 d-flex justify-content-center p-4"> -->
+      <div class="row bg2">
+        <div class="col-12 mt-3 mx-3 d-flex justify-content-center">
+          <div class="h2 fw-bold">Different Factors against Happiness Scores</div>
+        </div>
+        <div class="span p-4">
+          <span class="fs-6 italic" style="color:#6a6a6a;">Click on each <b>icons</b> below to find a different relation between the <b>Happiness Score</b> and each <b>Factors</b>.
+      </div>
+      </div>
+      <!---------- ICON SECTION  ----------->
+      <div class="row bg2 p-1">
+        <!-- GDP icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/economy.png"
+            alt="GDP icon unavailable"
+            class="factor-icon"
+            id="gdp_icon"
+            onclick="toggleSP('gdp_sp', 'gdp_icon')"
+          />
+        </div>
+        <!-- FAM icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/family.png"
+            alt="Family icon unavailable"
+            class="factor-icon"
+            id="fam_icon"
+            onclick="toggleSP('fam_sp', 'fam_icon')"
+          />
+        </div>
+
+        <!-- Health icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/health.png"
+            alt="Health icon unavailable"
+            class="factor-icon"
+            id="health_icon"
+            onclick="toggleSP('health_sp', 'health_icon')"
+          />
+        </div>
+
+        <!-- FREEDOM icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/freedom.png"
+            alt="Freedom icon unavailable"
+            class="factor-icon"
+            id="free_icon"
+            onclick="toggleSP('free_sp', 'free_icon')"
+          />
+        </div>
+
+        <!-- GEN icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/generosity.png"
+            alt="Generosity icon unavailable"
+            class="factor-icon"
+            id="gen_icon"
+            onclick="toggleSP('gen_sp', 'gen_icon')"
+          />
+        </div>
+
+        <!-- COR icon  -->
+        <div class="col-2 d-flex justify-content-center">
+          <img
+            src="icons/corruption.png"
+            alt="Corruption icon unavailable"
+            class="factor-icon"
+            id="cor_icon"
+            onclick="toggleSP('cor_sp', 'cor_icon')"
+          />
+        </div>
+      </div>
+
+      <!---------- GRAPH SECTION  ----------->  
+      <!-- GDP -->
+      <div class="row bg2 p-2 sp" id="gdp_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">The more richer the country, the more happier!</div>
+          According to the following bubble plot below, it can be seen that there is a 
+          <b>high correlation</b> between <b>Happiness Score </b> and <span class="fw-bold" style="color: #4EBA74;">Economy</span>. 
+          As a result, it can be concluded that more <b>richer countries</b> tend to be <b>happier</b> in comparison to poorer countries.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_economy_happiness" class="w-100"></div>
+        </div>
+      </div>
       
-    </div>
-    <div id="circle">
-    </div>
-    <br>
-    <br>
-    <!-- end pure grid group -->
+      <!-- FAM -->
+      <div class="row bg2 p-2 sp" id="fam_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">The better the Family (Social Support), the more happier!</div>
+          According to the following bubble plot below, it can be seen that there is a
+           <b>moderate correlation</b> between <b>Happiness Score </b> and <span class="fw-bold" style="color: #72A1C3;">Family</span>. 
+           As a result, it can be concluded that the <b>more social support</b> the countries have, the more likely they are to be <b>happier</b> in comparison to the countries have less social support. 
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_family_happiness" class="w-100"></div>
+        </div>
+      </div>
 
-     <!-- pure grid group -->
-     <div class="pure-g">
-        <div class="pure-u-1-1" style="text-align: center;">
-            <h2>Logged GDP per capita against Happiness Score</h2>
-            <p>We have seen above that different regions and nations have vastly different happiness levels.
-                Let's take a look at the possible indicators that are related to happiness by selecting the icons below!</p>
+      <!-- FREE -->
+      <div class="row bg2 p-2 sp" id="free_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Freedom makes people happy!</div>
+          According to the following bubble plot below, it can be seen that there is a
+           <b>moderate correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #fe9462;">Freedom</span>. 
+           As a result, it can be concluded that the <b>more freedom</b> the countries have, the more likely they are to be <b>happier</b> in comparison to the countries have less freedom.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_freedom_happiness" class="w-100"></div>
+        </div>
+      </div>
+
+      <!-- GEN -->
+      <div class="row bg2 p-3 sp" id="gen_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Being generous won't make you happy!</div>
+          According to the following bubble plot below, it can be seen that there is a 
+          <b>low correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #8AD9C2;">Generosity</span>. 
+          Therefore, regardless of being <b>generous</b> or <b>not generous</b> it won't affect the <span class="fw-bold" style="color: #078707;">happiness score</span> . 
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_generosity_happiness" class="w-100"></div>
+        </div>
+      </div>
+
+      <!-- HEALTH -->
+      <div class="row bg2 p-2 sp" id="health_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Healthy people will live longer!</div>
+          According to the following bubble plot below, it can be seen that there is a
+           <b>high correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #AB99B5;">Health (Life Expectancy)</span>. 
+           As a result, it can be concluded that the <b>greater</b> the life expectancy of the countries, the more likely they are to be <b>happier</b> in comparison to the countries that have bad health.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_health_happiness" class="w-100"></div>
+        </div>
+      </div>
       
+      <!-- COR -->
+      <div class="row bg2 p-2 sp" id="cor_sp">
+        <div class="span p-4">
+          <div class="h3 pb-3 fw-bold">Corruption rarely exist!</div>
+          According to the following bubble plot below, it can be seen that there is a
+           <b>mild correlation</b> between <b>Happiness Score</b> and <span class="fw-bold" style="color: #EF7284;">Trust (Government Corruption)</span>. 
+           Most countries are <b>free from corruption</b> regardless of being sad or happy. However, it can be seen that <b>European </b> countries
+           which have high happiness scores also have high corruption.
+          <br><br>
+          <span class="fs-6 italic" style="color:#6a6a6a;">You can use the <b>year scroll</b> at the bottom of the bubble plot to observe the data between the years <b>2021</b>, <b>2022</b> and <b>2023</b>
+            . You can also use the <b>dropdown box</b> or <b>click the certain continent</b> to view only the bubble from that continent.
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div id="bubble_corruption_happiness" class="w-100"></div>
+        </div>
       </div>
+
     </div>
-      <div id="bubble">
-      </div>
-      <!-- end pure grid group -->
+  </div>
+
+
   
-    <div class="pure-g">
-      <div class="pure-u-1-1 small-font" style="text-align: center;">
-        <p>This visualisation is created by Soh En Ming</a>.
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer class="text-center position-relative">
+      <p class="lead pt-5">Copyright &copy; 2023 Soh En Ming (32024975)
+        <br>
+        Dataset provided by <a href="https://worldhappiness.report/data/" class="stretched-link">World Happiness Report</a>
+      </p>
+      <a href="#" class="position-absolute bottom-0 end-0">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+  </footer>
+
+  <script type="text/javascript">
+    
+    function toggleSP(spId, icon) {
+      var targetSP = document.getElementById(spId);
+      var hideSP = document.getElementsByClassName('sp');
+      let parent = targetSP.parentNode;
+      let sp_siblings = parent.querySelectorAll('.sp');
+        
+      //hide all siblings
+      sp_siblings.forEach(el => {
+          if(el.id == spId){
+              el.style.display = 'flex';
+          }else{
+              el.style.display = 'none';
+          }
+      });
+
+      var targetIcon = document.getElementById(icon);
+      var darkIcons = document.getElementsByClassName('factor-icon');
+      //get the wrapper for all icons
+      let upUP_parent = targetIcon.closest('.p-1');
+      //get all img within upUP_parent
+      let other_Icons = upUP_parent.querySelectorAll('img');
+        
+      other_Icons.forEach( el => {
+          if(el.id == icon){
+              el.style.filter =  'grayscale(0%)';
+              el.style.filter =  'brightness(110%)';
+          }else{
+              el.style.filter = null; //remove inline style, so it wont override inline
+          }
+      });
+    }
+
+    function toggleMap(mapId, icon) {
+      var targetmap = document.getElementById(mapId);
+      var hidemap = document.getElementsByClassName('map');
+      let parent = targetmap.parentNode;
+      let map_siblings = parent.querySelectorAll('.map');
+        
+      //hide all siblings
+      map_siblings.forEach(el => {
+          if(el.id == mapId){
+              el.style.display = 'flex';
+          }else{
+              el.style.display = 'none';
+          }
+      });
+
+      var targetIcon = document.getElementById(icon);
+      var darkIcons = document.getElementsByClassName('button-icon');
+      //get the wrapper for all icons
+      let upUP_parent = targetIcon.closest('.p-2');
+      //get all img within upUP_parent
+      let other_Icons = upUP_parent.querySelectorAll('button');
+        
+      other_Icons.forEach( el => {
+          if(el.id == icon){
+              el.style.filter =  'grayscale(0%)';
+              el.style.filter =  'brightness(110%)';
+          }else{
+              el.style.filter = null; //remove inline style, so it wont override inline
+          }
+      });
+    }
+    $(document).ready(function() {
+          $('.flourish-credit').remove();
+          
+    });
+
+
+  </script>
   
-
-  </div> <!-- end page -->
-   
-<script type="text/javascript">
-  var specVis1 = "./normalised-stacked-bars-responsive.json";
-  var specVis2= "./line-chart-responsive.json";
-
-  vegaEmbed('#vis1', specVis1, {"actions": false});
-  
-   vegaEmbed('#vis2', specVis2, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-
-  vegaEmbed('#vis3', specVis1, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-
-  vegaEmbed('#vis4', specVis2, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
-</body>
-</html> 
+  </body>
+</html>

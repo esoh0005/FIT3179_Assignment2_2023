@@ -1,0 +1,201 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/2023_to_2021_WHI_Data.csv"
+    },
+    "config": {
+      "font": "Helvetica Neue, Arial",
+      "view": {"stroke": null},
+      "axis": {
+        "grid": true,
+        "labelFont": "Helvetica Neue, Arial",
+        "titleFont": "Helvetica Neue, Arial",
+        "labelColor": "black",
+        "titleColor": "black",
+        "gridColor": "lighter",
+        "labelFontSize": 12,
+        "labelLimit": 500,
+        "titleFontSize": 14
+      },
+      "lineBreak": "linebreak",
+      "title": {"fontSize": 20, "font": "Helvetica Neue, Arial"},
+      "style": {
+        "guide-title": {"font": "Helvetica Neue, Arial", "fontSize": 14},
+        "text": {
+          "font": "Helvetica Neue, Arial",
+          "fontSize": 19,
+          "fontStyle": "Italic"
+        },
+        "legend": {
+          "labelFont": "Helvetica Neue, Arial",
+          "labelFontSize": 12,
+          "titleFontSize": 14
+        }
+      }
+    },
+    "params": [
+      {
+        "name": "Country_selection",
+        "value": "Switzerland",
+        "bind": {
+          "input": "select",
+          "options": [
+            "Denmark",
+            "Switzerland",
+            "Iceland",
+            "Norway",
+            "Isreal",
+            "Finland",
+            "Netherlands",
+            "New Zealand",
+            "Sweden",
+            "Austria",
+            "Luxembourg"
+          ],
+          "name": "Country Selection: "
+        }
+      }
+    ],
+    "spacing": 5,
+    "facet": {
+      "column": {
+        "field": "year",
+        "header": {
+          "labelFontSize": 19,
+          "titleFontSize": 20,
+          "labelFont": "Helvetica Neue, Arial",
+          "titleFont": "Helvetica Neue, Arial"
+        },
+        "title": "Changes throughout Happiness Years"
+      }
+    },
+    "transform": [
+      {
+        "filter": "Country_selection == null || datum.country == Country_selection"
+      }
+    ],
+    "spec": {
+      "width": 415,
+      "height": 200,
+      "layer": [
+        {
+          "transform": [
+            {
+              "calculate": "format(datum.field_value/datum.happiness_score, ',.8f')",
+              "as": "percentage"
+            }
+          ],
+          "mark": {
+            "type": "arc",
+            "outerRadius": 140,
+            "innerRadius": 110,
+            "stroke": "#fff",
+            "padAngle": 0.01, "cornerRadius": 3
+          },
+          "encoding": {
+            "theta": {
+              "field": "percentage",
+              "type": "quantitative",
+              "stack": true
+            },
+            "color": {
+              "field": "field",
+              "type": "nominal",
+              "legend": {
+                "title": "Factor",
+                "labelFontSize": 12,
+                "titleFontSize": 14,
+                "orient": "top",
+                "direction": "horizontal"
+              },
+              "scale": {
+                "domain": [
+                  "Economy",
+                  "Family",
+                  "Freedom",
+                  "Generosity",
+                  "Health",
+                  "Residual",
+                  "Trust"
+                ],
+                "range": [
+                  "#4EBA74",
+                  "#72A1C3",
+                  "#fe9462",
+                  "#8AD9C2",
+                  "#AB99B5",
+                  "#F2BA3B",
+                  "#EF7284"
+                ]
+              }
+            },
+            "tooltip": [
+              {"field": "country", "type": "nominal", "title": "Country"},
+              {"field": "continent", "type": "nominal", "title": "Continent"},
+              {"field": "field", "type": "nominal", "title": "Factor"},
+              {
+                "field": "field_value",
+                "type": "quantitative",
+                "format": ".2f",
+                "title": "Factor Value"
+              },
+              {
+                "field": "percentage",
+                "type": "quantitative",
+                "format": ".2f",
+                "title": "Percentage"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {"calculate": "format(datum.happiness_score,',.2f')", "as": "HS"},
+            {
+              "calculate": "datum.country + 'linebreak Happiness Rank: ' + datum.rank + 'linebreak Happiness Score: ' + datum.HS",
+              "as": "text_annotation"
+            }
+          ],
+          "mark": {"type": "text", "radius": 0, "dx": 4, "dy": -20},
+          "encoding": {
+            "text": {"field": "text_annotation"},
+            "color": {"value": "#000000"}
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "format(datum.field_value/datum.happiness_score, ',.8f')",
+              "as": "percentage"
+            }
+          ],
+          "mark": {"type": "text", "radiusOffset": 180},
+          "encoding": {
+            "text": {"field": "percentage", "type": "nominal", "format": ".1%"},
+            "theta": {
+              "field": "percentage",
+              "type": "quantitative",
+              "stack": true
+            },
+            "radius": {"field": "percentage", "scale": {"type": "sqrt"}},
+            "color": {"field": "field", "type": "nominal", "legend": null}
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "format(datum.field_value/datum.happiness_score, ',.8f')",
+              "as": "percentage"
+            }
+          ],
+          "mark": {"type": "text"},
+          "encoding": {
+            "text": {"field": "field", "type": "nominal"},
+            "theta": {"field": "field", "type": "nominal", "stack": true},
+            "radius": {"field": "field", "scale": {"type": "sqrt"}},
+            "color": {"field": "field", "type": "nominal", "legend": null}
+          }
+        }
+      ]
+    }
+  }

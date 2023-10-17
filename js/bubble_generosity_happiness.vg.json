@@ -1,0 +1,238 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 450,
+    "data": {
+      "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/All_NewCleaned_WHI.csv"
+    },
+    "config": {
+      "font": "Helvetica Neue, Arial",
+      "axis": {
+        "labelFont": "Helvetica Neue, Arial",
+        "titleFont": "Helvetica Neue, Arial",
+        "labelColor": "black",
+        "titleColor": "black",
+        "gridColor": "lighter",
+        "labelFontSize": 12,
+        "labelLimit": 500,
+        "titleFontSize": 14
+      },
+      "lineBreak": "linebreak",
+      "title": {"fontSize": 20, "font": "Helvetica Neue, Arial"},
+      "style": {
+        "guide-title": {"font": "Helvetica Neue, Arial", "fontSize": 14},
+        "text": {
+          "font": "Helvetica Neue, Arial",
+          "fontSize": 19,
+          "fontStyle": "Italic"
+        },
+        "legend": {
+          "labelFont": "Helvetica Neue, Arial",
+          "labelFontSize": 12,
+          "titleFontSize": 14
+        }
+      }
+    },
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2023,
+        "bind": {
+          "input": "range",
+          "min": 2021,
+          "max": 2023,
+          "step": 1,
+          "name": "Year Selection: "
+        }
+      },
+      {
+        "name": "Continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Africa",
+            "Asia",
+            "Europe",
+            "North America",
+            "Australia",
+            "South America"
+          ],
+          "labels": [
+            "All",
+            "Africa",
+            "Asia",
+            "Europe",
+            "North America",
+            "Australia",
+            "South America"
+          ],
+          "name": "Continent: "
+        }
+      }
+    ],
+    "layer": [
+      {
+        "transform": [
+          {"filter": "datum.happiness_score > 0"},
+          {"filter": "datum.family > 0"},
+          {"filter": "Year_selection == null || datum.year == Year_selection"},
+          {
+            "filter": "Continent_selection == null || datum.continent == Continent_selection"
+          },
+          {
+            "lookup": "country",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/js/ne_110m.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "ne_110m_admin_0_countries"
+                }
+              },
+              "key": "properties.NAME",
+              "fields": ["properties.POP_EST"]
+            }
+          }
+        ],
+        "params": [
+          {
+            "name": "continent_highlight",
+            "select": {"type": "point", "fields": ["continent"]},
+            "bind": "legend"
+          }
+        ],
+        "mark": "circle",
+        "encoding": {
+          "x": {
+            "field": "happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "axis": {"tickCount": 10},
+            "scale": {"domain": [2, 8]}
+          },
+          "y": {
+            "field": "generosity",
+            "type": "quantitative",
+            "title": "Generosity",
+            "scale": {"domain": [-0.05, 0.6]}
+          },
+          "color": {
+            "field": "continent",
+            "type": "nominal",
+            "title": "Continent",
+            "legend": {
+              "labelFont": "Helvetica Neue, Arial",
+              "titleFont": "Helvetica Neue, Arial"
+            },
+            "scale": {
+                "domain": [
+                    "Asia",
+                    "Africa",
+                    "North America",
+                    "South America",
+                    "Europe",
+                    "Australia"
+                ],
+                "range": [
+                    "#FFECB3",
+                    "#FFA75E",
+                    "#8ED6AC",
+                    "#F29BCB",
+                    "#8EC9DB",
+                    "#FF8C8B"
+                ]
+            }
+          },
+          "opacity": {
+            "condition": {"param": "continent_highlight", "value": 0.8},
+            "value": 0.1
+          },
+          "size": {
+            "field": "properties.POP_EST",
+            "type": "quantitative",
+            "legend": {
+              "labelFont": "Helvetica Neue, Arial",
+              "titleFont": "Helvetica Neue, Arial",
+              "format": ".3s"
+            },
+            "title": "Population",
+            "scale": {
+              "type": "threshold",
+              "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+              "range": [10, 20, 200, 400, 800, 1600]
+            }
+          },
+          "tooltip": [
+            {"field": "country", "type": "nominal", "title": "Country"},
+            {"field": "continent", "type": "nominal", "title": "Continent"},
+            {
+              "field": "happiness_score",
+              "type": "quantitative",
+              "title": "Happiness Score",
+              "format": ".2f"
+            },
+            {
+              "field": "generosity",
+              "type": "quantitative",
+              "title": "Economy (GDP per Capita)",
+              "format": ".2f"
+            },
+            {
+              "field": "properties.POP_EST",
+              "type": "quantitative",
+              "title": "Population"
+            },
+            {"field": "year", "type": "quantitative", "title": "Year"}
+          ]
+        }
+      },
+      {
+      "transform": [
+        {"filter": "datum.country == 'Luxembourg'"},
+        {
+          "calculate": "'Generosity has little affect on Happiness Scores'",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": {"type": "text", "fontWeight": "bold", "dx": 50, "dy": -200},
+      "encoding": {
+        "text": {"field": "text_annotation"},
+        "color": {"value": "#8AD9C2"}
+      }
+    },
+      {
+        "transform": [
+          {
+            "filter": {
+              "field": "country",
+              "oneOf": ["Malaysia", "Luxembourg", "Myanmar", "Indonesia", "India"]
+            }
+          },
+          {"filter": "Year_selection == null || datum.year == Year_selection"}
+        ],
+        "mark": {"type": "text", "dy": 15},
+        "encoding": {
+          "x": {"field": "happiness_score", "type": "quantitative"},
+          "y": {"field": "generosity", "type": "quantitative"},
+          "text": {"field": "country", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {"param": "continent_highlight", "value": 0.8},
+            "value": 0.4
+          }
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "firebrick"},
+        "transform": [
+          {"filter": "Year_selection == null || datum.year == Year_selection"},
+          {"regression": "generosity", "on": "happiness_score"}
+        ],
+        "encoding": {
+
+        }
+      }
+    ]
+  }
+  

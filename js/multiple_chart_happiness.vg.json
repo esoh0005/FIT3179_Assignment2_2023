@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/Nesest_WHI_Report.csv"
+  },
+  "params": [],
+  "vconcat": [
+    {
+      "width": 1185,
+      "height": 200,
+      "title": {"text": "Drag to filter out an interval", "fontSize": 14},
+      "transform": [
+        {"filter": "datum['Regional indicator'] != 'NA'"},
+        {"filter": "datum.year > 2005"}
+      ],
+      "params": [
+        {
+          "name": "time_brush",
+          "select": {
+            "type": "interval",
+            "encodings": ["x"],
+            "mark": {"fill": "antiquewhite", "fillOpacity": 10, "stroke": "greenyellow"}
+          }
+        },
+        {
+          "name": "region",
+          "select": {"type": "point", "fields": ["Regional indicator"]},
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "line": true
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "nominal", "title": "Year"},
+        "y": {
+          "aggregate": "mean",
+          "field": "ll",
+          "title": "Happiness score",
+          "stack": "normalize"
+        },
+        "color": {
+          "field": "Regional indicator",
+          "title": "Region",
+          "scale": {
+              "domain": [
+                  "Asia",
+                  "Africa",
+                  "North America",
+                  "South America",
+                  "Europe",
+                  "Australia"
+              ],
+              "range": [
+                  "#FFECB3",
+                  "#FFA75E",
+                  "#8ED6AC",
+                  "#F29BCB",
+                  "#8EC9DB",
+                  "#FF8C8B"
+              ]
+            },
+          "legend": {
+            "titlePadding": 10,
+            "title": "Filter the charts by clicking on a continent",
+            "orient": "top",
+            "titleFontSize": 15,
+            "titleFont": "Noto Sans,sans-serif",
+            "titleLimit": 1200
+          }
+        },
+        "tooltip": [
+          {"field": "year", "title": "Year"},
+          {"field": "Regional indicator", "title": "Region"},
+          {
+            "aggregate": "mean",
+            "field": "ll",
+            "title": "Happiness score",
+            "format": ".2f"
+          }
+        ],
+        "opacity": {
+          "condition": {"param": "region", "value": 1},
+          "value": 0.2
+        }
+      }
+    },
+    {
+      "width": 1185,
+      "height": 680,
+      "title": "10 happiest countries and saddest countries",
+      "transform": [
+        {"filter": {"param": "time_brush"}},
+        {"filter": "datum['Regional indicator'] != 'NA'"},
+        {"filter": "datum.year > 2005"},
+        {
+          "aggregate": [{"op": "mean", "field": "ll", "as": "AverageScore"}],
+          "groupby": ["Country", "Regional indicator"]
+        },
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "AverageScore", "order": "descending"}]
+        },
+        {
+          "joinaggregate": [{"op": "max", "field": "rank", "as": "total"}
+          ]
+        },
+        {"filter": "datum.rank <= 10 || datum.rank >= datum.total - 10"}
+      ],
+      "encoding": {
+        "y": {
+          "title": null,
+          "field": "Country",
+          "type": "nominal",
+          "sort": {"field": "AverageScore", "op": "mean", "order": "descending"}
+        },
+        "x": {
+          "field": "AverageScore",
+          "type": "quantitative",
+          "title": "Average Happiness score"
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {
+            "field": "AverageScore",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Average Happiness score"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": "bar",
+          "encoding": {
+            "color": {"field": "Regional indicator"},
+            "opacity": {
+              "condition": {"param": "region", "value": 1},
+              "value": 0.4
+            }
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "right", "xOffset": -6},
+          "encoding": {
+            "y": {
+              "field": "Country",
+              "type": "nominal",
+              "axis": null,
+              "sort": {
+                "field": "AverageScore",
+                "op": "mean",
+                "order": "descending"
+              }
+            },
+            "x": {
+              "field": "AverageScore",
+              "type": "quantitative",
+              "title": "Average Happiness score"
+            },
+            "opacity": {
+              "condition": {"param": "region", "value": 1},
+              "value": 0.4
+            },
+            "text": {"field": "Country"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "axis": {
+      "labelFont": "Noto Sans', sans-serif",
+      "labelAngle": 0,
+      "labelColor": "black",
+      "titleColor": "black",
+      "gridColor": "lighter",
+      "labelFontSize": 14,
+      "labelLimit": 500
+    },
+    "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5},
+    "style": {
+      "guide-title": {
+        "font": "Noto Sans', sans-serif",
+        "limit": 400,
+        "fontSize": 15
+      },
+      "text": {
+        "font": "Noto Sans', sans-serif",
+        "fontWeight": "normal",
+        "size": 14
+      }
+    },
+    "title": {
+      "fontSize": 20,
+      "orient": "top"
+},
+    "legend": {
+      "columns": 6,
+      "columnPadding": 40,
+      "titleAlign": "center",
+      "labelLimit": 300,
+      "labelFontSize": 16,
+      "labelFont": "Noto Sans', sans-serif",
+      "labelPadding": 4,
+      "rowPadding": 6
+    }
+  }
+}

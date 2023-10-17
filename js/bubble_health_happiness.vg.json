@@ -36,11 +36,12 @@
     "params": [
       {
         "name": "Year_selection",
-        "value": 2019,
+        "value": 2023,
         "bind": {
-          "input": "select",
-          "options": [2021, 2022, 2023],
-          "labels": ["2023"],
+          "input": "range",
+          "min": 2021,
+          "max": 2023,
+          "step": 1,
           "name": "Year Selection: "
         }
       },
@@ -74,7 +75,7 @@
       {
         "transform": [
           {"filter": "datum.happiness_score > 0"},
-          {"filter": "datum.gdp_per_capita > 0"},
+          {"filter": "datum.family > 0"},
           {"filter": "Year_selection == null || datum.year == Year_selection"},
           {
             "filter": "Continent_selection == null || datum.continent == Continent_selection"
@@ -83,7 +84,7 @@
             "lookup": "country",
             "from": {
               "data": {
-                "url": "https://raw.githubusercontent.com/chloechee1130/FIT3179_A2/main/json/ne_110m.json",
+                "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/js/ne_110m.json",
                 "format": {
                   "type": "topojson",
                   "feature": "ne_110m_admin_0_countries"
@@ -106,15 +107,15 @@
           "x": {
             "field": "happiness_score",
             "type": "quantitative",
-            "title": "Hapiness Score",
+            "title": "Happiness Score",
             "axis": {"tickCount": 10},
-            "scale": {"domain": [2, 8]}
+            "scale": {"domain": [1.5, 8]}
           },
           "y": {
-            "field": "gdp_per_capita",
+            "field": "health",
             "type": "quantitative",
-            "title": "Economy (GDP per Capita)",
-            "scale": {"domain": [0, 1.8]}
+            "title": "Health (Life Expectancy)",
+            "scale": {"domain": [-0.05, 0.9]}
           },
           "color": {
             "field": "continent",
@@ -126,21 +127,21 @@
             },
             "scale": {
               "domain": [
-                "North America",
-                "South America",
-                "Europe",
-                "Africa",
-                "Asia",
-                "Australia"
-              ],
-              "range": [
-                "#CBA048",
-                "#FF8A70",
-                "#6296BC",
-                "#7DBCA9",
-                "#989685",
-                "#5F5C3B"
-              ]
+                    "Asia",
+                    "Africa",
+                    "North America",
+                    "South America",
+                    "Europe",
+                    "Australia"
+                ],
+                "range": [
+                    "#FFECB3",
+                    "#FFA75E",
+                    "#8ED6AC",
+                    "#F29BCB",
+                    "#8EC9DB",
+                    "#FF8C8B"
+                ]
             }
           },
           "opacity": {
@@ -156,11 +157,11 @@
               "format": ".3s"
             },
             "title": "Population",
-              "scale": {
+            "scale": {
               "type": "threshold",
               "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
               "range": [10, 20, 200, 400, 800, 1600]
-            },
+            }
           },
           "tooltip": [
             {"field": "country", "type": "nominal", "title": "Country"},
@@ -172,7 +173,7 @@
               "format": ".2f"
             },
             {
-              "field": "gdp_per_capita",
+              "field": "health",
               "type": "quantitative",
               "title": "Economy (GDP per Capita)",
               "format": ".2f"
@@ -187,25 +188,25 @@
         }
       },
       {
-        "transform": [
-          {"filter": "datum.country == 'Luxembourg'"},
-          {
-            "calculate": "'All Western European countries have high economic production'",
-            "as": "text_annotation"
-          }
-        ],
-        "mark": {"type": "text", "fontWeight": "bold", "dx": 50, "dy": -210},
-        "encoding": {
-          "text": {"field": "text_annotation"},
-          "color": {"value": "#4EBA74"}
+      "transform": [
+        {"filter": "datum.country == 'Luxembourg'"},
+        {
+          "calculate": "'Most African countries have low life linebreak  expectancy leading to low happiness'",
+          "as": "text_annotation"
         }
-      },
+      ],
+      "mark": {"type": "text", "fontWeight": "bold", "dx": 250, "dy": 150},
+      "encoding": {
+        "text": {"field": "text_annotation"},
+        "color": {"value": "#AB99B5"}
+      }
+    },
       {
         "transform": [
           {
             "filter": {
               "field": "country",
-              "oneOf": ["Malaysia", "Luxembourg", "Taiwan", "Haiti", "India"]
+              "oneOf": ["Malaysia", "Luxembourg", "Zimbabwe", "Haiti", "India"]
             }
           },
           {"filter": "Year_selection == null || datum.year == Year_selection"}
@@ -213,7 +214,7 @@
         "mark": {"type": "text", "dy": 15},
         "encoding": {
           "x": {"field": "happiness_score", "type": "quantitative"},
-          "y": {"field": "gdp_per_capita", "type": "quantitative"},
+          "y": {"field": "health", "type": "quantitative"},
           "text": {"field": "country", "type": "nominal"},
           "color": {"value": "black"},
           "opacity": {
@@ -226,12 +227,13 @@
         "mark": {"type": "line", "color": "firebrick"},
         "transform": [
           {"filter": "Year_selection == null || datum.year == Year_selection"},
-          {"regression": "gdp_per_capita", "on": "happiness_score"}
+          {"regression": "health", "on": "happiness_score"}
         ],
         "encoding": {
-          "y": {"field": "gdp_per_capita", "type": "quantitative"},
+          "y": {"field": "health", "type": "quantitative"},
           "x": {"field": "happiness_score", "type": "quantitative"}
         }
       }
     ]
   }
+  

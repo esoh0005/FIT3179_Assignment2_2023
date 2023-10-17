@@ -1,48 +1,127 @@
-.body {
-    font-family: 'Source Sans Pro', sans-serif;
+.span.p-4 {
+  text-align: justify;
 }
 
-h1 {
-    font-weight: 900;
+.button-icon {
+  background-color: #008b8b; /* Green */
+  border: none;
+  color: white;
+  width: 130px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  filter: grayscale(100%);
+  border-radius: 20px;
+}
+.button-icon:hover {
+  filter: grayscale(0%);
+  filter: brightness(110%);
+}
+.italic { 
+  font-style: italic; 
+}
+.container {
+      border: 2px solid;
+      border-color: #f6b614;
+      box-shadow: 5px 10px #bab9b9;
 }
 
+.rounded {
+  border-top-left-radius: 10px; 
+  border-top-right-radius: 10px; 
+}
+
+.bgwhite {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.header {
+  background-color: #F8D664;
+}
+
+.bg2 {
+  background-color: #ffffff;
+
+}
+
+.bg3 {
+    background-color: rgb(245,245,245);
+}
+
+.factor-icon {
+  width: 80px;
+  height: 80px;
+  filter: grayscale(100%);
+}
+
+.factor-icon:hover {
+  filter: grayscale(0%);
+  filter: brightness(110%);
+}
+.sp {
+  display: none;
+}
+.map{
+  display: none;
+}
+
+.vega-bind-name {
+  padding: 5px;
+}
+
+#headline {
+  font-family: "Sora", serif;
+  font-size: 4em;
+  color: #ffffff;
+}
 body {
-    background-color: lightgray;
+  font-size: large;
+  font-family: 'Inter', sans-serif !important;
+  background-color: #ffffff;
+}
+#gdp_sp {
+  display: flex;
 }
 
-.page {
-    width: 1000px;
-    background-color: white;
-    margin: auto;
-    padding: 50px;
-    padding-top: 35px;
+#fam_sp {
+  display: flex;
 }
 
-.vis-container {
-    width: 100%;
+#free_sp {
+  display: flex;
 }
 
-.description h2,
-h1 {
-    margin-top: 0px;
+#health_sp {
+  display: flex;
 }
 
-.description-right {
-    padding-left: 20px;
+#trust_sp {
+  display: flex;
 }
 
-.description-left {
-    padding-right: 20px;
+#gen_sp {
+  display: flex;
 }
 
-.pure-g {
-    margin-bottom: 25px;
+#cor_sp {
+  display: flex;
 }
 
-.small-font {
-    font-size: 14px;
+#map_2019 {
+  display: flex;
 }
 
-#map {float:none; width:800px; padding:30px 100px 20px 50px; color:#775b30; font-size:12px;}
-#pie {margin:40px -45px  0; float:none; width:800px; padding:500px -100px 50px -500px; color:#775b30; font-size:12px;}
-#area {margin:40px 100px 0; float:left; width:250px; padding:500px -100px 50px -500px; color:#775b30; font-size:12px;}
+#map_2020 {
+  display: flex;
+}
+
+#flourish-credit {
+  display: none !important;
+}
+
+

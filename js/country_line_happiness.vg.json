@@ -1,0 +1,61 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1215,
+    "height": 500,
+    "data": {
+      "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/WHI_With_Images.csv"
+    },
+    "transform": [
+      {"filter": "datum.year > 2007"},
+      {
+        "sort": [{"field": "happiness_score", "order": "descending"}],
+        "window": [{"op": "rank", "as": "rank"}],
+        "groupby": ["year"]
+      },
+      {"filter": "datum.rank <= Top_N"}
+    ],
+    "params": [
+      {
+        "name": "Top_N",
+        "value": 5,
+        "bind": {
+          "input": "range",
+          "min": 3,
+          "max": 10,
+          "step": 1,
+          "name": "Total countries:"
+        }
+      }
+    ],
+    "layer": [
+      {
+        "transform": [],
+        "mark": {"type": "line", "point": {"size": 300}},
+        "encoding": {
+          "x": {"field": "year", "type": "ordinal"},
+          "y": {"field": "rank", "type": "ordinal"},
+          "color": {"field": "country", "type": "nominal", "legend": false},
+          "tooltip": [
+            {"field": "year", "type": "ordinal", "title": "Year"},
+            {"field": "country", "type": "nominal", "title": "Country"},
+            {"field": "happiness_score", "title": "Happiness score"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "image", "width": 30, "height": 30},
+        "encoding": {
+          "x": {"field": "year", "type": "ordinal"},
+          "y": {"field": "rank", "type": "ordinal"},
+          "url": {"field": "imageUrl", "type": "nominal"},
+          "href": {"field": "wikiUrl"},
+          "tooltip": [
+            {"field": "year", "type": "ordinal", "title": "Year"},
+            {"field": "country", "type": "nominal", "title": "Country"},
+            {"field": "happiness_score", "title": "Happiness score"}
+          ]
+        }
+      }
+    ]
+  }
+  

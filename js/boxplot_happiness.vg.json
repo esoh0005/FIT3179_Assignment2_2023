@@ -1,156 +1,213 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
-    "height": 450,
-    "padding":{"left": 20, "top":0, "right":50,"bottom": 0},
-    "data": {
-      "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/NewCleaned_WHI.csv"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1120,
+  "height": 450,
+  "padding": { "left": 20, "top": 0, "right": 50, "bottom": 0 },
+  "data": {
+    "url": "https://raw.githubusercontent.com/esoh0005/FIT3179_Assignment2_2023/main/Data/NewCleaned_WHI.csv"
+  },
+  "config": {
+    "axis": {
+      "labelFont": "Noto Sans, sans-serif",
+      "labelColor": "black",
+      "titleColor": "black",
+      "gridColor": "lighter",
+      "labelFontSize": 14,
+      "labelLimit": 500
     },
-    "config": {
-      "font": "Helvetica Neue, Arial",
-      "axis": {
-        "labelFont": "Helvetica Neue, Arial",
-        "titleFont": "Helvetica Neue, Arial",
-        "labelColor": "black",
-        "titleColor": "black",
-        "gridColor": "lighter",
-        "labelFontSize": 12,
-        "labelLimit": 500,
-        "titleFontSize": 14
-      },
-      "view": {
-        "stroke": "transparent"
-      },
-      "lineBreak": "linebreak",
-      "title": {"fontSize": 20, "font": "Helvetica Neue, Arial"},
-      "style": {
-        "guide-title": {"font": "Helvetica Neue, Arial", "fontSize": 14},
-        "text": {
-          "font": "Helvetica Neue, Arial",
-          "fontSize": 19,
-          "fontStyle": "Italic"
-        },
-        "legend": {
-          "labelFont": "Helvetica Neue, Arial",
-          "labelFontSize": 12,
-          "titleFontSize": 14
-        }
+    "lineBreak": "lb",
+    "title": { "fontSize": 15 },
+    "padding": { "left": 5, "top": 5, "right": 5, "bottom": 5 },
+    "style": {
+      "guide-title": { "font": "Noto Sans, sans-serif", "fontSize": 15 },
+      "text": {
+        "font": "Noto Sans, sans-serif",
+        "fontWeight": "normal",
+        "size": 15
       }
-    },
-    "params": [
-      {
+    }
+  },
+  "params": [
+    {
       "name": "Year_selection",
       "value": 2023,
       "bind": {
-        "input": "select",
-        "options": [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
-        "labels": ["2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+        "input": "range",
+        "min": 2010,
+        "max": 2023,
+        "step": 1,
         "name": "Year Selection: "
       }
-  }
-  
-    ],
-    "layer": [
-      {
-        "transform": [
-          {"filter": "datum.happiness_score > 0"},
-          {"filter": "Year_selection == null || datum.year == Year_selection"}
-        ],
-        "mark": {"type": "boxplot"},
-        "encoding": {
-          "x": {
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        { "filter": "datum.happiness_score > 0" },
+        { "filter": "Year_selection == null || datum.year == Year_selection" }
+      ],
+      "mark": {
+        "type": "boxplot",
+        "box": {
+          "cornerRadius": 10,
+          "size": 30,
+          "stroke": "black"
+        },
+        "median": {
+          "stroke": "black"
+        },
+        "ticks": true
+      },
+      "encoding": {
+        "x": {
+          "field": "happiness_score",
+          "type": "quantitative",
+          "title": "Happiness Score",
+          "scale": { "zero": false }
+        },
+        "y": { "field": "continent", "type": "nominal", "title": null },
+        "color": {
+          "field": "continent",
+          "type": "nominal",
+          "title": "Continent",
+          "scale": {
+            "domain": [
+              "Asia",
+              "Africa",
+              "North America",
+              "South America",
+              "Europe",
+              "Australia"
+            ],
+            "range": [
+              "#FFECB3",
+              "#FFA75E",
+              "#8ED6AC",
+              "#F29BCB",
+              "#8EC9DB",
+              "#FF8C8B"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "country", "type": "nominal", "title": "Country" },
+          { "field": "continent", "type": "nominal", "title": "Continent" },
+          {
             "field": "happiness_score",
             "type": "quantitative",
-            "title": "Happiness Score",
-            "scale": {"zero": false}
+            "title": "Happiness score",
+            "format": ".2f"
           },
-          "y": {"field": "continent", "type": "nominal", "title": null},
-          "color": {
-            "field": "continent",
-            "type": "nominal",
-            "title": "Continent",
-            "scale": {
-              "domain": [
-                "North America",
-                "South America",
-                "Europe",
-                "Africa",
-                "Asia",
-                "Australia"
-              ],
-              "range": [
-                "#1f77b4", 
-                "#ff7f0e",  
-                "#CBA048",  
-                "#7DBCA9",  
-                "#9467bd",  
-                "#8c564b"   
-              ]
-            },
-            "legend": null
-          },
-          "tooltip": [
-            {"field": "country", "type": "nominal", "title": "Country"},
-            {"field": "continent", "type": "nominal", "title": "Continent"},
-            {
-              "field": "happiness_score",
-              "type": "quantitative",
-              "title": "Happiness score",
-              "format": ".2f"
-            },
-            {"field": "year", "type": "quantitative", "title": "Year"}
-          ]
-        }
-      },
-      {
-        "transform": [
-          {"filter": "datum.happiness_score > 0"},
-          {"filter": "Year_selection == null || datum.year == Year_selection"},
-          {
-            "joinaggregate": [
-              {"op": "mean", "field": "happiness_score", "as": "mean_hs"}
-            ]
-          },
-          {"calculate": "format(datum.mean_hs, ',.2f')", "as": "MEAN_HS"}
-        ],
-        "mark": "rule",
-        "encoding": {
-          "x": {
-            "aggregate": "mean",
-            "field": "happiness_score",
-            "type": "quantitative"
-          },
-          "color": {"value": "#c21807"},
-          "size": {"value": 3},
-          "tooltip": [
-            {
-              "field": "MEAN_HS",
-              "title": "Average Happiness score",
-              "format": ".2f"
-            }
-          ]
-        }
-      },
-      {
-        "transform": [
-          {"filter": "datum.happiness_score > 0"},
-          {"filter": "Year_selection == null || datum.year == Year_selection"},
-          {
-            "joinaggregate": [
-              {"op": "mean", "field": "happiness_score", "as": "mean_hs"}
-            ]
-          },
-          {"calculate": "format(datum.mean_hs, ',.2f')", "as": "MEAN_HS"},
-          {
-            "calculate": "'Average Happiness Score = ' + datum.MEAN_HS",
-            "as": "text_annotation"
-          }
-        ],
-        "mark": {"type": "text", "fontWeight": "bold", "dx": 20, "dy": -240},
-        "encoding": {
-          "text": {"field": "text_annotation"},
-          "color": {"value": "#c21807"}
-        }
+          { "field": "year", "type": "quantitative", "title": "Year" }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "transform": [
+        { "filter": "datum.happiness_score > 0" },
+        { "filter": "Year_selection == null || datum.year == Year_selection" },
+        {
+          "joinaggregate": [
+            { "op": "mean", "field": "happiness_score", "as": "mean_hs" }
+          ]
+        },
+        { "calculate": "format(datum.mean_hs, ',.2f')", "as": "MEAN_HS" }
+      ],
+      "mark": "rule",
+      "encoding": {
+        "x": {
+          "aggregate": "mean",
+          "field": "happiness_score",
+          "type": "quantitative"
+        },
+        "color": { "value": "#c21807" },
+        "size": { "value": 3 },
+        "tooltip": [
+          {
+            "field": "MEAN_HS",
+            "title": "Average Happiness score",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        { "filter": "datum.happiness_score > 0" },
+        { "filter": "Year_selection == null || datum.year == Year_selection" },
+        {
+          "joinaggregate": [
+            { "op": "mean", "field": "happiness_score", "as": "mean_hs" }
+          ]
+        },
+        { "calculate": "format(datum.mean_hs, ',.2f')", "as": "MEAN_HS" },
+        {
+          "calculate": "'Average Happiness Score of ' + datum.MEAN_HS+' for Year '+ datum.year",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": { "type": "text", "fontWeight": "bold", "dx": 20, "dy": -240 },
+      "encoding": {
+        "text": { "field": "text_annotation" },
+        "color": { "value": "#c21807" }
+      }
+    },
+    {
+      "transform": [
+        { "filter": "Year_selection == null || datum.year == Year_selection" },
+        { "filter": "datum.continent == 'Africa'" },
+        { "filter": "datum.happiness_score > 0" },
+        {
+          "joinaggregate": [
+            { "op": "mean", "field": "happiness_score", "as": "mean_hs" }
+          ]
+        },
+        { "calculate": "format(datum.mean_hs, ',.2f')", "as": "MEAN_HS" },
+        {
+          "calculate": "'Africa is the unhappiest continent with an lb average happiness score of ' + datum.MEAN_HS",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": { "type": "text", "fontWeight": "bold", "dx": -100, "dy": -160 },
+      "encoding": {
+        "text": { "field": "text_annotation" },
+        "color": { "value": "#FFA75E" }
+      }
+    },
+    {
+      "transform": [
+        { "filter": "Year_selection == null || datum.year == Year_selection" },
+        { "filter": "datum.continent == 'Europe'" },
+        { "filter": "datum.happiness_score > 0" },
+        { "aggregate": [{ "op": "argmax", "field": "happiness_score", "as": "max_happiness_score"  }]},
+        {
+          "calculate": "'The highest Happiness Score resides in lb' + datum.max_happiness_score.country + ' located at Europe'",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": { "type": "text", "fontWeight": "bold", "dx": 290, "dy": 65 },
+      "encoding": {
+        "text": { "field": "text_annotation" },
+        "color": { "value": "#8EC9DB" }
+      }
+    },
+    {
+      "transform": [
+        { "filter": "Year_selection == null || datum.year == Year_selection" },
+        { "filter": "datum.continent == 'Europe'" },
+        { "filter": "datum.happiness_score > 0" },
+        { "aggregate": [{ "op": "argmax", "field": "happiness_score", "as": "max_happiness_score"  }]},
+        {
+          "calculate": "'Australia is overall the happiest continent'",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": { "type": "text", "fontWeight": "bold", "dx": 320, "dy": -10 },
+      "encoding": {
+        "text": { "field": "text_annotation" },
+        "color": { "value": "#FF8C8B" }
+      }
+    }
+  ]
+}
