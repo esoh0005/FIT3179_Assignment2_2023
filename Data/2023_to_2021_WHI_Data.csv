@@ -1,13 +1,13 @@
 ﻿country,happiness_score,continent,year,rank,field,field_value
 Finland,7.804,Europe,2023,1,Economy,1.888
 Denmark,7.586,Europe,2023,2,Economy,1.949
-Iceland,7.530,Europe,2023,3,Economy,1.926
+Iceland,7.53,Europe,2023,3,Economy,1.926
 Israel,7.473,Asia,2023,4,Economy,1.833
 Netherlands,7.403,Europe,2023,5,Economy,1.942
 Sweden,7.395,Europe,2023,6,Economy,1.921
 Norway,7.315,Europe,2023,7,Economy,1.994
-Switzerland,7.240,Europe,2023,8,Economy,2.022
-Luxembourg,7.228,Europe,2023,9,Economy,2.200
+Switzerland,7.24,Europe,2023,8,Economy,2.022
+Luxembourg,7.228,Europe,2023,9,Economy,2.2
 New Zealand,7.123,Australia,2023,10,Economy,1.842
 Finland,7.821,Europe,2022,1,Economy,1.892
 Denmark,7.636,Europe,2022,2,Economy,1.953
@@ -15,42 +15,42 @@ Iceland,7.557,Europe,2022,3,Economy,1.936
 Switzerland,7.512,Europe,2022,4,Economy,2.026
 Netherlands,7.415,Europe,2022,5,Economy,1.945
 Luxembourg,7.404,Europe,2022,6,Economy,2.209
-Sweden,7.384,Europe,2022,7,Economy,1.920
+Sweden,7.384,Europe,2022,7,Economy,1.92
 Norway,7.365,Europe,2022,8,Economy,1.997
 Israel,7.364,Asia,2022,9,Economy,1.826
-New Zealand,7.200,Australia,2022,10,Economy,1.852
+New Zealand,7.2,Australia,2022,10,Economy,1.852
 Finland,7.842,Europe,2021,1,Economy,1.446
-Denmark,7.620,Europe,2021,2,Economy,1.502
+Denmark,7.62,Europe,2021,2,Economy,1.502
 Switzerland,7.571,Europe,2021,3,Economy,1.566
 Iceland,7.554,Europe,2021,4,Economy,1.482
 Netherlands,7.464,Europe,2021,5,Economy,1.501
 Norway,7.392,Europe,2021,6,Economy,1.543
 Sweden,7.363,Europe,2021,7,Economy,1.478
 Luxembourg,7.324,Europe,2021,8,Economy,1.751
-New Zealand,7.277,Australia,2021,9,Economy,1.400
+New Zealand,7.277,Australia,2021,9,Economy,1.4
 Austria,7.268,Europe,2021,10,Economy,1.492
 Finland,7.804,Europe,2023,1,Family,1.585
 Denmark,7.586,Europe,2023,2,Family,1.548
-Iceland,7.530,Europe,2023,3,Family,1.620
+Iceland,7.53,Europe,2023,3,Family,1.62
 Israel,7.473,Asia,2023,4,Family,1.521
 Netherlands,7.403,Europe,2023,5,Family,1.488
-Sweden,7.395,Europe,2023,6,Family,1.510
+Sweden,7.395,Europe,2023,6,Family,1.51
 Norway,7.315,Europe,2023,7,Family,1.521
-Switzerland,7.240,Europe,2023,8,Family,1.463
+Switzerland,7.24,Europe,2023,8,Family,1.463
 Luxembourg,7.228,Europe,2023,9,Family,1.357
 New Zealand,7.123,Australia,2023,10,Family,1.544
 Finland,7.821,Europe,2022,1,Family,1.258
 Denmark,7.636,Europe,2022,2,Family,1.243
-Iceland,7.557,Europe,2022,3,Family,1.320
+Iceland,7.557,Europe,2022,3,Family,1.32
 Switzerland,7.512,Europe,2022,4,Family,1.226
 Netherlands,7.415,Europe,2022,5,Family,1.206
 Luxembourg,7.404,Europe,2022,6,Family,1.155
 Sweden,7.384,Europe,2022,7,Family,1.204
 Norway,7.365,Europe,2022,8,Family,1.239
 Israel,7.364,Asia,2022,9,Family,1.221
-New Zealand,7.200,Australia,2022,10,Family,1.235
+New Zealand,7.2,Australia,2022,10,Family,1.235
 Finland,7.842,Europe,2021,1,Family,1.106
-Denmark,7.620,Europe,2021,2,Family,1.108
+Denmark,7.62,Europe,2021,2,Family,1.108
 Switzerland,7.571,Europe,2021,3,Family,1.079
 Iceland,7.554,Europe,2021,4,Family,1.172
 Netherlands,7.464,Europe,2021,5,Family,1.079
@@ -61,12 +61,12 @@ New Zealand,7.277,Australia,2021,9,Family,1.094
 Austria,7.268,Europe,2021,10,Family,1.062
 Finland,7.804,Europe,2023,1,Health,0.535
 Denmark,7.586,Europe,2023,2,Health,0.537
-Iceland,7.530,Europe,2023,3,Health,0.559
+Iceland,7.53,Europe,2023,3,Health,0.559
 Israel,7.473,Asia,2023,4,Health,0.577
 Netherlands,7.403,Europe,2023,5,Health,0.545
 Sweden,7.395,Europe,2023,6,Health,0.562
 Norway,7.315,Europe,2023,7,Health,0.544
-Switzerland,7.240,Europe,2023,8,Health,0.582
+Switzerland,7.24,Europe,2023,8,Health,0.582
 Luxembourg,7.228,Europe,2023,9,Health,0.549
 New Zealand,7.123,Australia,2023,10,Health,0.513
 Finland,7.821,Europe,2022,1,Health,0.775
@@ -74,43 +74,43 @@ Denmark,7.636,Europe,2022,2,Health,0.777
 Iceland,7.557,Europe,2022,3,Health,0.803
 Switzerland,7.512,Europe,2022,4,Health,0.822
 Netherlands,7.415,Europe,2022,5,Health,0.787
-Luxembourg,7.404,Europe,2022,6,Health,0.790
+Luxembourg,7.404,Europe,2022,6,Health,0.79
 Sweden,7.384,Europe,2022,7,Health,0.803
 Norway,7.365,Europe,2022,8,Health,0.786
 Israel,7.364,Asia,2022,9,Health,0.818
-New Zealand,7.200,Australia,2022,10,Health,0.752
+New Zealand,7.2,Australia,2022,10,Health,0.752
 Finland,7.842,Europe,2021,1,Health,0.741
-Denmark,7.620,Europe,2021,2,Health,0.763
+Denmark,7.62,Europe,2021,2,Health,0.763
 Switzerland,7.571,Europe,2021,3,Health,0.816
 Iceland,7.554,Europe,2021,4,Health,0.772
 Netherlands,7.464,Europe,2021,5,Health,0.753
 Norway,7.392,Europe,2021,6,Health,0.782
 Sweden,7.363,Europe,2021,7,Health,0.763
-Luxembourg,7.324,Europe,2021,8,Health,0.760
+Luxembourg,7.324,Europe,2021,8,Health,0.76
 New Zealand,7.277,Australia,2021,9,Health,0.785
 Austria,7.268,Europe,2021,10,Health,0.782
 Finland,7.804,Europe,2023,1,Freedom,0.772
 Denmark,7.586,Europe,2023,2,Freedom,0.734
-Iceland,7.530,Europe,2023,3,Freedom,0.738
+Iceland,7.53,Europe,2023,3,Freedom,0.738
 Israel,7.473,Asia,2023,4,Freedom,0.569
 Netherlands,7.403,Europe,2023,5,Freedom,0.672
 Sweden,7.395,Europe,2023,6,Freedom,0.754
 Norway,7.315,Europe,2023,7,Freedom,0.752
-Switzerland,7.240,Europe,2023,8,Freedom,0.678
-Luxembourg,7.228,Europe,2023,9,Freedom,0.710
+Switzerland,7.24,Europe,2023,8,Freedom,0.678
+Luxembourg,7.228,Europe,2023,9,Freedom,0.71
 New Zealand,7.123,Australia,2023,10,Freedom,0.672
 Finland,7.821,Europe,2022,1,Freedom,0.736
 Denmark,7.636,Europe,2022,2,Freedom,0.719
 Iceland,7.557,Europe,2022,3,Freedom,0.718
 Switzerland,7.512,Europe,2022,4,Freedom,0.677
 Netherlands,7.415,Europe,2022,5,Freedom,0.651
-Luxembourg,7.404,Europe,2022,6,Freedom,0.700
+Luxembourg,7.404,Europe,2022,6,Freedom,0.7
 Sweden,7.384,Europe,2022,7,Freedom,0.724
 Norway,7.365,Europe,2022,8,Freedom,0.728
 Israel,7.364,Asia,2022,9,Freedom,0.568
-New Zealand,7.200,Australia,2022,10,Freedom,0.680
+New Zealand,7.2,Australia,2022,10,Freedom,0.68
 Finland,7.842,Europe,2021,1,Freedom,0.691
-Denmark,7.620,Europe,2021,2,Freedom,0.686
+Denmark,7.62,Europe,2021,2,Freedom,0.686
 Switzerland,7.571,Europe,2021,3,Freedom,0.653
 Iceland,7.554,Europe,2021,4,Freedom,0.698
 Netherlands,7.464,Europe,2021,5,Freedom,0.647
@@ -118,29 +118,29 @@ Norway,7.392,Europe,2021,6,Freedom,0.703
 Sweden,7.363,Europe,2021,7,Freedom,0.685
 Luxembourg,7.324,Europe,2021,8,Freedom,0.639
 New Zealand,7.277,Australia,2021,9,Freedom,0.665
-Austria,7.268,Europe,2021,10,Freedom,0.640
+Austria,7.268,Europe,2021,10,Freedom,0.64
 Finland,7.804,Europe,2023,1,Generosity,0.126
 Denmark,7.586,Europe,2023,2,Generosity,0.208
-Iceland,7.530,Europe,2023,3,Generosity,0.250
+Iceland,7.53,Europe,2023,3,Generosity,0.25
 Israel,7.473,Asia,2023,4,Generosity,0.124
 Netherlands,7.403,Europe,2023,5,Generosity,0.251
 Sweden,7.395,Europe,2023,6,Generosity,0.225
 Norway,7.315,Europe,2023,7,Generosity,0.212
-Switzerland,7.240,Europe,2023,8,Generosity,0.151
+Switzerland,7.24,Europe,2023,8,Generosity,0.151
 Luxembourg,7.228,Europe,2023,9,Generosity,0.149
-New Zealand,7.123,Australia,2023,10,Generosity,0.230
+New Zealand,7.123,Australia,2023,10,Generosity,0.23
 Finland,7.821,Europe,2022,1,Generosity,0.109
 Denmark,7.636,Europe,2022,2,Generosity,0.188
-Iceland,7.557,Europe,2022,3,Generosity,0.270
+Iceland,7.557,Europe,2022,3,Generosity,0.27
 Switzerland,7.512,Europe,2022,4,Generosity,0.147
 Netherlands,7.415,Europe,2022,5,Generosity,0.271
-Luxembourg,7.404,Europe,2022,6,Generosity,0.120
+Luxembourg,7.404,Europe,2022,6,Generosity,0.12
 Sweden,7.384,Europe,2022,7,Generosity,0.218
 Norway,7.365,Europe,2022,8,Generosity,0.217
 Israel,7.364,Asia,2022,9,Generosity,0.155
-New Zealand,7.200,Australia,2022,10,Generosity,0.245
+New Zealand,7.2,Australia,2022,10,Generosity,0.245
 Finland,7.842,Europe,2021,1,Generosity,0.124
-Denmark,7.620,Europe,2021,2,Generosity,0.208
+Denmark,7.62,Europe,2021,2,Generosity,0.208
 Switzerland,7.571,Europe,2021,3,Generosity,0.204
 Iceland,7.554,Europe,2021,4,Generosity,0.293
 Netherlands,7.464,Europe,2021,5,Generosity,0.302
@@ -151,12 +151,12 @@ New Zealand,7.277,Australia,2021,9,Generosity,0.276
 Austria,7.268,Europe,2021,10,Generosity,0.215
 Finland,7.804,Europe,2023,1,Trust,0.535
 Denmark,7.586,Europe,2023,2,Trust,0.525
-Iceland,7.530,Europe,2023,3,Trust,0.187
+Iceland,7.53,Europe,2023,3,Trust,0.187
 Israel,7.473,Asia,2023,4,Trust,0.158
 Netherlands,7.403,Europe,2023,5,Trust,0.394
-Sweden,7.395,Europe,2023,6,Trust,0.520
+Sweden,7.395,Europe,2023,6,Trust,0.52
 Norway,7.315,Europe,2023,7,Trust,0.463
-Switzerland,7.240,Europe,2023,8,Trust,0.475
+Switzerland,7.24,Europe,2023,8,Trust,0.475
 Luxembourg,7.228,Europe,2023,9,Trust,0.418
 New Zealand,7.123,Australia,2023,10,Trust,0.471
 Finland,7.821,Europe,2022,1,Trust,0.534
@@ -168,14 +168,44 @@ Luxembourg,7.404,Europe,2022,6,Trust,0.388
 Sweden,7.384,Europe,2022,7,Trust,0.512
 Norway,7.365,Europe,2022,8,Trust,0.474
 Israel,7.364,Asia,2022,9,Trust,0.143
-New Zealand,7.200,Australia,2022,10,Trust,0.483
+New Zealand,7.2,Australia,2022,10,Trust,0.483
 Finland,7.842,Europe,2021,1,Trust,0.481
-Denmark,7.620,Europe,2021,2,Trust,0.485
+Denmark,7.62,Europe,2021,2,Trust,0.485
 Switzerland,7.571,Europe,2021,3,Trust,0.413
-Iceland,7.554,Europe,2021,4,Trust,0.170
+Iceland,7.554,Europe,2021,4,Trust,0.17
 Netherlands,7.464,Europe,2021,5,Trust,0.384
 Norway,7.392,Europe,2021,6,Trust,0.427
 Sweden,7.363,Europe,2021,7,Trust,0.448
 Luxembourg,7.324,Europe,2021,8,Trust,0.353
 New Zealand,7.277,Australia,2021,9,Trust,0.445
 Austria,7.268,Europe,2021,10,Trust,0.292
+Finland,7.804,Europe,2023,1,Residual,2.363
+Denmark,7.586,Europe,2023,2,Residual,2.084
+Iceland,7.53,Europe,2023,3,Residual,2.250
+Israel,7.473,Asia,2023,4,Residual,2.691
+Netherlands,7.403,Europe,2023,5,Residual,2.110
+Sweden,7.395,Europe,2023,6,Residual,1.903
+Norway,7.315,Europe,2023,7,Residual,1.829
+Switzerland,7.24,Europe,2023,8,Residual,1.870
+Luxembourg,7.228,Europe,2023,9,Residual,1.845
+New Zealand,7.123,Australia,2023,10,Residual,1.852
+Finland,7.821,Europe,2022,1,Residual,2.518
+Denmark,7.636,Europe,2022,2,Residual,2.226
+Iceland,7.557,Europe,2022,3,Residual,2.320
+Switzerland,7.512,Europe,2022,4,Residual,2.153
+Netherlands,7.415,Europe,2022,5,Residual,2.137
+Luxembourg,7.404,Europe,2022,6,Residual,2.042
+Sweden,7.384,Europe,2022,7,Residual,2.003
+Norway,7.365,Europe,2022,8,Residual,1.925
+Israel,7.364,Asia,2022,9,Residual,2.634
+New Zealand,7.2,Australia,2022,10,Residual,1.954
+Finland,7.842,Europe,2021,1,Residual,3.253
+Denmark,7.62,Europe,2021,2,Residual,2.868
+Switzerland,7.571,Europe,2021,3,Residual,2.839
+Iceland,7.554,Europe,2021,4,Residual,2.967
+Netherlands,7.464,Europe,2021,5,Residual,2.798
+Norway,7.392,Europe,2021,6,Residual,2.580
+Sweden,7.363,Europe,2021,7,Residual,2.683
+Luxembourg,7.324,Europe,2021,8,Residual,2.653
+New Zealand,7.277,Australia,2021,9,Residual,2.612
+Austria,7.268,Europe,2021,10,Residual,2.784
